@@ -629,7 +629,7 @@ footer .inner { display: grid; gap: 1rem; justify-items: center; }
       zoom.hidden = false;
     });
   });
-  function closeZoom() { zoom.hidden = true; }
+  function closeZoom() { zoom.hidden = true; hold = apps.matches(":hover"); }
   zoom.addEventListener("click", closeZoom);
   addEventListener("keydown", function (e) { if (e.key === "Escape") closeZoom(); });
 
