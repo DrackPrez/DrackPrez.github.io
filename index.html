@@ -167,15 +167,22 @@ nav a:hover { color: var(--cyan); }
 .contact .btn.ghost-btn { background: none; color: var(--cyan); border: 1px solid var(--cyan); }
 .email { font: 500 1.05rem/1.4 var(--mono); user-select: all; overflow-wrap: anywhere; }
 
-.apps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2.2rem 1.5rem; }
-.app { display: grid; gap: .55rem; align-content: start; min-width: 0; }
+.apps { display: flex; gap: 1.5rem; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 1rem; scrollbar-width: none; }
+.apps::-webkit-scrollbar { display: none; }
+.app { flex: 0 0 calc((100% - 3rem) / 3); scroll-snap-align: start; display: grid; gap: .55rem; align-content: start; min-width: 0; }
 .app .frame { padding: .35rem; margin-bottom: .4rem; }
 .app .shot img { aspect-ratio: 1176 / 836; object-fit: cover; object-position: top left; }
 .app .tag { font: 600 .8rem/1.2 var(--label); letter-spacing: .16em; text-transform: uppercase; color: var(--cyan); }
 .app h3 { font-size: 1.3rem; }
 .app p { font-size: .98rem; color: var(--muted); }
-@media (max-width: 980px) { .apps { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (max-width: 620px) { .apps { grid-template-columns: 1fr; } }
+@media (max-width: 980px) { .app { flex-basis: calc((100% - 1.5rem) / 2); } }
+@media (max-width: 620px) { .app { flex-basis: 88%; } }
+.car-ctl { display: flex; align-items: center; justify-content: center; gap: 1.2rem; margin-top: 1.2rem; }
+.car-ctl button { width: 3rem; height: 3rem; border: 1px solid var(--cyan); background: none; color: var(--cyan); font: 500 1.2rem/1 var(--mono); cursor: pointer; transition: background .2s, color .2s; }
+.car-ctl button:hover { background: var(--cyan); color: var(--cyan-ink); }
+.car-ctl button:disabled { opacity: .35; cursor: default; background: none; color: var(--cyan); }
+#car-count { font: 500 .85rem/1 var(--mono); color: var(--muted); font-variant-numeric: tabular-nums; min-width: 4rem; text-align: center; }
+
 
 .flow { display: flex; align-items: stretch; gap: 0; margin-bottom: 1.6rem; }
 .node { flex: 1 1 0; min-width: 0; background: var(--panel); border: 1px solid var(--line); padding: 1rem .55rem; text-align: center; display: grid; gap: .3rem; justify-items: center; align-content: start; transition: border-color .3s, transform .3s, background .3s; }
@@ -286,6 +293,11 @@ footer .inner { display: grid; gap: 1rem; justify-items: center; }
         <article class="app reveal"><div class="frame"><button class="shot" type="button" aria-label="Ampliar: Monitoreo API SAP"><img src="assets/monitoreo.jpg" alt="Monitoreo API SAP" width="1176" height="836" loading="lazy"></button></div><span class="tag">Integraciones</span><h3>Monitoreo API SAP</h3><p>Registra cada llamada hacia SAP, con resultado, tiempos y panel de métricas.</p></article>
         <article class="app reveal delay1"><div class="frame"><button class="shot" type="button" aria-label="Ampliar: Reportería de facturación"><img src="assets/reporteria.jpg" alt="Reportería de facturación" width="1176" height="836" loading="lazy"></button></div><span class="tag">Datos</span><h3>Reportería de facturación</h3><p>Facturas y notas de crédito por período, con análisis y descarga en Excel o CSV.</p></article>
         <article class="app reveal delay2"><div class="frame"><button class="shot" type="button" aria-label="Ampliar: Carga hacia Looker"><img src="assets/looker.jpg" alt="Carga hacia Looker" width="1176" height="836" loading="lazy"></button></div><span class="tag">Datos</span><h3>Carga hacia Looker</h3><p>Finanzas mantiene homologaciones y forecast, y el panel se actualiza solo.</p></article>
+      </div>
+      <div class="car-ctl">
+        <button type="button" id="car-prev" aria-label="Módulos anteriores">←</button>
+        <span id="car-count" aria-live="polite">1 / 12</span>
+        <button type="button" id="car-next" aria-label="Módulos siguientes">→</button>
       </div>
     </div>
   </section>
@@ -556,6 +568,24 @@ footer .inner { display: grid; gap: 1rem; justify-items: center; }
       });
     });
   });
+
+  var apps = document.querySelector(".apps"), cards = apps.querySelectorAll(".app");
+  var prev = document.getElementById("car-prev"), next = document.getElementById("car-next"), count = document.getElementById("car-count");
+  function current() { return Math.round(apps.scrollLeft / (cards[0].offsetWidth + parseFloat(getComputedStyle(apps).columnGap))); }
+  function carousel() {
+    var end = apps.scrollLeft + apps.clientWidth >= apps.scrollWidth - 4;
+    var shown = end ? cards.length : Math.min(current() + 1, cards.length);
+    count.textContent = shown + " / " + cards.length;
+    prev.disabled = apps.scrollLeft <= 4;
+    next.disabled = end;
+  }
+  function move(dir) { apps.scrollBy({ left: dir * (cards[0].offsetWidth + parseFloat(getComputedStyle(apps).columnGap)), behavior: calm ? "auto" : "smooth" }); }
+  prev.addEventListener("click", function () { move(-1); });
+  next.addEventListener("click", function () { move(1); });
+  apps.addEventListener("scroll", carousel, { passive: true });
+  addEventListener("resize", carousel);
+  setInterval(carousel, 300);
+  carousel();
 
   var copy = document.getElementById("copy");
   copy.addEventListener("click", function () {
