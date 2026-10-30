@@ -320,16 +320,16 @@ footer .inner { display: grid; gap: 1rem; justify-items: center; }
           </div>
         </article>
         <article class="feat reveal delay2">
-          <div class="frame"><button class="shot" type="button" aria-label="Ver caso: Reportería que dejó de ser manual"><img src="assets/looker.jpg" alt="Reportería que dejó de ser manual" width="1176" height="836" loading="lazy"></button></div>
+          <div class="frame"><button class="shot" type="button" aria-label="Ver caso: Base de datos que alimenta Looker"><img src="assets/looker.jpg" alt="Base de datos que alimenta Looker" width="1176" height="836" loading="lazy"></button></div>
           <span class="tag">Automatización</span>
-          <h3>Reportería que dejó de ser manual</h3>
-          <p>El estado de resultados se actualiza sin subir archivos a mano.</p>
+          <h3>Base de datos que alimenta Looker</h3>
+          <p>Procesos en Python limpian la data y entregan la base con la que se trabaja en Looker.</p>
           <ul class="facts"><li><b>3×</b><span>cargas al día</span></li><li><b>177.679</b><span>filas de forecast</span></li></ul>
           <span class="more">Ver caso completo →</span>
           <div class="case-body" hidden>
             <section><h4>El problema</h4><p>Parte de la información para gerencia dependía de archivos Excel que se cargaban manualmente.</p></section>
-            <section><h4>Mi rol</h4><p>Automaticé los procesos y gestiono la información que llega a los paneles de gerencia.</p></section>
-            <section><h4>Decisiones clave</h4><ul><li>Pipelines programados en Airflow que limpian, homologan y calculan márgenes.</li><li>Los dos últimos meses se recargan y los anteriores quedan congelados, porque una orden puede seguir cambiando después de facturada.</li><li>Finanzas ajusta las homologaciones desde una pantalla.</li></ul></section>
+            <section><h4>Mi rol</h4><p>Entrego la base de información y doy soporte con campos, nuevas columnas y nuevos cálculos. Los paneles se manejan en Looker a partir de esa base.</p></section>
+            <section><h4>Decisiones clave</h4><ul><li>Serie de procesos en Python, programados en Airflow, que limpian, homologan y calculan márgenes.</li><li>Los dos últimos meses se recargan y los anteriores quedan congelados, porque una orden puede seguir cambiando después de facturada.</li><li>Finanzas ajusta las homologaciones desde una pantalla.</li></ul></section>
             <section><h4>Resultado</h4><ul><li>El estado de resultados se actualiza tres veces al día.</li><li>Cada ejecución queda registrada para revisarla desde el portal.</li></ul></section>
           </div>
         </article>
