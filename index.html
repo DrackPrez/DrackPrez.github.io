@@ -1,0 +1,560 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="description" content="Portafolio de Nicolás Pérez, ingeniero en informática: desarrollo full stack, datos e integraciones."><style>body{margin:0}img{max-width:100%}</style></head><body><title>Nicolás Pérez Portafolio</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600&family=Barlow:wght@400;500&family=IBM+Plex+Mono:wght@400;500&family=Playfair+Display:wght@400;700&display=swap">
+<style>
+/* Layout: página larga de bandas oscuras alternadas, inspirada en la referencia: paneles que se montan sobre un bloque cian */
+:root {
+  color-scheme: dark;
+  --ink: #12131f; --band: #191a2b; --panel: #222338; --line: #38395a;
+  --fg: #eef0f6; --muted: #a6a9c0; --cyan: #22b8e2; --cyan-ink: #06222c; --todo: #ffc27a;
+  --display: "Playfair Display", Georgia, serif;
+  --label: "Barlow Condensed", "Arial Narrow", sans-serif;
+  --body: "Barlow", "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", Consolas, monospace;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { scroll-behavior: smooth; scroll-padding-top: 4.5rem; }
+body { background: var(--ink); color: var(--fg); font: 400 1.0625rem/1.65 var(--body); overflow-x: hidden; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--ink); }
+.inner {
+  max-width: 70rem; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.band { padding-block: 5.5rem; position: relative; overflow: hidden; }
+.band.alt { background: var(--band); }
+.band.tex { background:
+  radial-gradient(60rem 30rem at 85% 10%, rgba(34,184,226,.13), transparent 70%),
+  repeating-linear-gradient(0deg, transparent 0 39px, rgba(255,255,255,.028) 39px 40px),
+  repeating-linear-gradient(90deg, transparent 0 39px, rgba(255,255,255,.028) 39px 40px),
+  var(--band); }
+h1, h2, h3 { margin: 0; font-family: var(--display); font-weight: 400; line-height: 1.12; text-wrap: balance; }
+h2 { font-size: clamp(1.9rem, 4.6vw, 3rem); text-transform: uppercase; color: var(--cyan); letter-spacing: .01em; }
+h3 { font-size: 1.55rem; }
+p { margin: 0; max-width: 65ch; }
+.eyebrow { font: 600 .9rem/1.3 var(--label); letter-spacing: .24em; text-transform: uppercase; color: var(--fg); }
+.muted { color: var(--muted); }
+.todo { color: var(--todo); border-bottom: 1px dashed var(--todo); }
+.center { text-align: center; display: grid; gap: .9rem; justify-items: center; margin-bottom: 3.25rem; }
+.center p { color: var(--muted); }
+.btn { display: inline-block; background: var(--cyan); color: var(--cyan-ink); font: 600 1rem/1 var(--label); letter-spacing: .14em; text-transform: uppercase; text-decoration: none; padding: 1rem 1.6rem; transition: transform .2s; }
+.btn:hover { transform: translateY(-2px); }
+:focus-visible { outline: 2px solid var(--cyan); outline-offset: 3px; }
+
+/* Barra superior y progreso */
+.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: rgba(18,19,31,.92); border-bottom: 1px solid var(--line); }
+.top .inner { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-block: .7rem; }
+.mark { font: 700 1.05rem/1 var(--display); color: var(--cyan-ink); background: var(--cyan); padding: .45rem .6rem; text-decoration: none; }
+nav { display: flex; gap: 1.4rem; font: 600 .9rem/1 var(--label); letter-spacing: .14em; text-transform: uppercase; }
+nav a { color: var(--fg); text-decoration: none; }
+nav a:hover { color: var(--cyan); }
+#progress { height: 2px; background: var(--cyan); width: 100%; transform: scaleX(0); transform-origin: left; }
+@media (max-width: 600px) { nav { gap: .9rem; font-size: .78rem; letter-spacing: .08em; } }
+
+/* Portada */
+.hero { padding-block: 6.5rem 5rem; text-align: center; position: relative; overflow: hidden; background: radial-gradient(46rem 26rem at 50% 30%, rgba(34,184,226,.16), transparent 72%), var(--ink); }
+.hero svg.flow { position: absolute; inset: 0; width: 100%; height: 100%; }
+.hero svg path { fill: none; stroke: var(--cyan); stroke-opacity: .32; stroke-width: 1.5; stroke-dasharray: 6 12; animation: flow 26s linear infinite; }
+@keyframes flow { to { stroke-dashoffset: -600; } }
+.hero .inner { position: relative; display: grid; gap: 1.4rem; justify-items: center; }
+.hero h1 { font-size: clamp(3rem, 11vw, 7rem); font-weight: 700; letter-spacing: -.01em; }
+.hero p { font-size: 1.2rem; color: var(--muted); max-width: 46ch; }
+.strip { background: var(--band); border-block: 1px solid var(--line); }
+.strip .inner { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; padding-block: 1.4rem; }
+.strip div div { min-width: 0; }
+.strip b { display: block; font: 600 1rem/1.3 var(--label); letter-spacing: .12em; text-transform: uppercase; color: var(--cyan); }
+.strip span { font-size: .95rem; color: var(--muted); }
+@media (max-width: 680px) { .strip .inner { grid-template-columns: 1fr; } }
+
+/* Pantallas */
+.shot { display: block; width: 100%; padding: 0; margin: 0; border: 0; background: none; cursor: zoom-in; position: relative; }
+.shot img { display: block; width: 100%; height: auto; }
+.frame { border: 1px solid var(--line); background: var(--panel); padding: .55rem; box-shadow: 0 24px 50px rgba(0,0,0,.42); min-width: 0; }
+
+/* Sobre mí */
+.about { display: grid; grid-template-columns: 1fr minmax(0, 1.05fr) 1fr; gap: 2.5rem; align-items: center; position: relative; }
+.about > div { min-width: 0; }
+.ghost { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); font: 700 clamp(9rem, 26vw, 19rem)/1 var(--display); color: rgba(255,255,255,.035); pointer-events: none; }
+.about h2 { margin-bottom: 1rem; font-size: clamp(1.7rem, 3.4vw, 2.3rem); }
+.about .frame { position: relative; }
+.signature { font: 700 2rem/1.2 var(--display); color: var(--cyan); text-transform: uppercase; margin-block: .4rem .7rem; }
+@media (max-width: 860px) { .about { grid-template-columns: 1fr; } }
+
+/* Panel destacado sobre bloque cian */
+.feature { display: grid; grid-template-columns: minmax(0, 2.5fr) minmax(0, 1fr); gap: 1.4rem; align-items: stretch; }
+.feature .main { position: relative; background: var(--panel); padding: 1.1rem; display: grid; gap: 1.1rem; box-shadow: -2rem 0 0 var(--cyan); margin-left: 2rem; min-width: 0; }
+.feature .side { display: grid; gap: 1.4rem; min-width: 0; align-content: start; }
+.mini { border: 1px solid var(--line); background: var(--panel); padding: .55rem; display: grid; gap: .7rem; }
+.mini p { font: 600 .92rem/1.3 var(--label); letter-spacing: .1em; text-transform: uppercase; text-align: center; padding-bottom: .35rem; }
+.feature .copy { display: grid; gap: .5rem; padding: .3rem .5rem; }
+@media (max-width: 820px) { .feature { grid-template-columns: 1fr; } .feature .main { margin-left: .75rem; box-shadow: -.75rem 0 0 var(--cyan); } .feature .side { grid-template-columns: 1fr 1fr; } }
+
+/* Habilidades alrededor del centro */
+.skills { display: grid; grid-template-columns: 1fr minmax(10rem, 15rem) 1fr; gap: 2rem 3rem; align-items: center; }
+.skills ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.2rem; min-width: 0; }
+.skills li { display: grid; grid-template-columns: 3.4rem 1fr; gap: .9rem; align-items: center; padding-bottom: 1.1rem; border-bottom: 1px solid var(--line); }
+.skills li div { min-width: 0; }
+.skills b { display: block; font: 600 1.05rem/1.25 var(--label); letter-spacing: .1em; text-transform: uppercase; }
+.skills small { font-size: .92rem; color: var(--muted); line-height: 1.35; display: block; }
+.dot { width: 3.4rem; height: 3.4rem; border-radius: 50%; display: grid; place-items: center; background: var(--panel); border: 1px solid var(--cyan); color: var(--cyan); font: 500 .95rem/1 var(--mono); }
+.core { aspect-ratio: 1; max-width: 100%; border-radius: 50%; border: 1px dashed var(--cyan); display: grid; place-items: center; text-align: center; padding: 1.2rem; position: relative; animation: pulse 4s ease-in-out infinite; }
+.core b { font: 700 1.5rem/1.15 var(--display); }
+@keyframes pulse { 50% { box-shadow: 0 0 0 14px rgba(34,184,226,.08); } }
+@media (max-width: 860px) { .skills { grid-template-columns: 1fr; } .core { width: 12rem; margin: 0 auto; order: -1; } }
+
+/* Cifras y pasos */
+.numbers { display: grid; grid-template-columns: minmax(10rem, 13rem) minmax(0, 1fr); gap: 0; }
+.stats { background: var(--ink); border: 1px solid var(--line); display: grid; text-align: center; }
+.stats > div { padding: 1.4rem .8rem; border-bottom: 1px solid var(--line); }
+.stats > div:last-child { border-bottom: 0; background: var(--panel); }
+.stats b { display: block; font: 400 2.8rem/1.05 var(--display); color: var(--cyan); font-variant-numeric: tabular-nums; }
+.stats span { font: 600 .82rem/1.3 var(--label); letter-spacing: .12em; text-transform: uppercase; color: var(--fg); }
+.steps { background: var(--panel); border-top: 1.1rem solid var(--cyan); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; }
+.step { padding: 1.4rem 1.2rem 1.8rem; border-left: 1px solid var(--line); display: grid; gap: .7rem; align-content: start; text-align: center; min-width: 0; }
+.step:first-child { border-left: 0; }
+.step .frame { padding: .3rem; box-shadow: none; }
+.step h3 { text-transform: uppercase; color: var(--cyan); }
+.step p { font-size: .96rem; color: var(--muted); }
+@media (max-width: 900px) { .numbers { grid-template-columns: 1fr; } .stats { grid-template-columns: repeat(3, minmax(0, 1fr)); } .stats > div { border-bottom: 0; border-left: 1px solid var(--line); padding-inline: .35rem; } .stats > div:first-child { border-left: 0; } .stats b { font-size: 2rem; } .steps { grid-template-columns: 1fr; } .step { border-left: 0; border-top: 1px solid var(--line); } .step:first-child { border-top: 0; } }
+
+/* Pestañas */
+.tabs { display: flex; flex-wrap: wrap; justify-content: center; border-bottom: 1px solid var(--line); margin-bottom: 2.4rem; }
+.tabs button { flex: 1 1 11rem; background: none; border: 0; border-bottom: 2px solid transparent; color: var(--muted); font: 600 1rem/1.2 var(--label); letter-spacing: .13em; text-transform: uppercase; padding: 1rem .5rem; cursor: pointer; }
+.tabs button[aria-selected="true"] { color: var(--fg); border-bottom-color: var(--cyan); }
+.pane { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); background: var(--panel); align-items: center; }
+.pane .frame { border: 0; box-shadow: none; padding: 0; }
+.pane .copy { padding: 2rem; display: grid; gap: .9rem; }
+.pane h3 { color: var(--cyan); font-size: 1.9rem; text-transform: uppercase; }
+.pane ul { margin: 0; padding-left: 1.1rem; color: var(--muted); }
+@media (max-width: 820px) { .pane { grid-template-columns: 1fr; } }
+
+/* Kanban en movimiento */
+.kanban { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .6rem; padding: 1.1rem; background: var(--ink); min-height: 19rem; }
+.kcol { min-width: 0; display: grid; align-content: start; gap: .5rem; }
+.kcol > b { font: 600 .78rem/1.2 var(--label); letter-spacing: .1em; text-transform: uppercase; color: var(--cyan); }
+.kcard { background: var(--panel); border: 1px solid var(--line); padding: .45rem .5rem; font: 400 .72rem/1.3 var(--mono); color: var(--fg); animation: arrive .45s ease; overflow-wrap: anywhere; }
+.kcard i { display: block; font-style: normal; color: var(--muted); }
+@keyframes arrive { from { transform: translateX(-14px); background: var(--cyan); color: var(--cyan-ink); } }
+.demo-note { font: 400 .78rem/1.4 var(--mono); color: var(--muted); padding: .7rem 1.1rem; background: var(--ink); }
+
+/* Casos */
+.cases { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.4rem; }
+.case { background: var(--panel); padding: 1.6rem; display: grid; gap: .8rem; align-content: start; min-width: 0; }
+.case .big { font: 400 3rem/1 var(--display); color: var(--cyan); font-variant-numeric: tabular-nums; }
+.case .tag { font: 600 .82rem/1.3 var(--label); letter-spacing: .14em; text-transform: uppercase; }
+.case p { font-size: .98rem; color: var(--muted); }
+.case code { font-family: var(--mono); font-size: .86em; color: var(--fg); }
+@media (max-width: 860px) { .cases { grid-template-columns: 1fr; } }
+
+/* Herramientas */
+.tools { display: flex; gap: 1.5rem; overflow-x: auto; padding-bottom: 1rem; scroll-snap-type: x proximity; justify-content: safe center; }
+.tool { flex: 0 0 8.2rem; text-align: center; display: grid; gap: .7rem; justify-items: center; scroll-snap-align: start; }
+.tool .disc { width: 7rem; height: 7rem; border-radius: 50%; background: #fff; display: grid; place-items: center; overflow: hidden; transition: transform .25s; font: 700 1.5rem/1 var(--mono); color: #17324d; }
+.tool .disc.dark { background: #000; }
+.tool:hover .disc { transform: scale(1.06); }
+.tool .disc img { width: 78%; height: 78%; object-fit: contain; }
+.tool b { font: 600 .92rem/1.2 var(--label); letter-spacing: .1em; text-transform: uppercase; }
+
+.timeline { display: grid; gap: 1.4rem; max-width: 48rem; margin: 0 auto; }
+.timeline article { background: var(--panel); padding: 1.5rem 1.6rem; display: grid; gap: .35rem; min-width: 0; }
+.when { font: 500 .8rem/1.4 var(--mono); color: var(--cyan); }
+.timeline .tag { font: 600 .92rem/1.3 var(--label); letter-spacing: .12em; text-transform: uppercase; }
+.timeline p { color: var(--muted); font-size: 1rem; margin-top: .3rem; }
+.contact { display: flex; flex-wrap: wrap; justify-content: center; gap: .8rem; }
+.contact .btn.ghost-btn { background: none; color: var(--cyan); border: 1px solid var(--cyan); }
+.email { font: 500 1.05rem/1.4 var(--mono); user-select: all; overflow-wrap: anywhere; }
+
+footer { background: var(--ink); border-top: 1px solid var(--line); text-align: center; padding-block: 4rem; }
+footer .inner { display: grid; gap: 1rem; justify-items: center; }
+
+/* Aparecen al bajar: parten visibles y atenuadas, nunca ocultas */
+.reveal { transition: opacity .75s ease, transform .75s cubic-bezier(.2,.7,.2,1); }
+.js .reveal:not(.in) { opacity: .22; transform: translateY(34px); }
+.js .reveal.left:not(.in) { transform: translateX(-42px); }
+.js .reveal.right:not(.in) { transform: translateX(42px); }
+.delay1 { transition-delay: .12s; } .delay2 { transition-delay: .24s; }
+
+#zoom { position: fixed; inset: 0; z-index: 50; background: rgba(8,9,16,.93); padding: max(16px, env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) 16px max(16px, env(safe-area-inset-left, 0px)); display: grid; place-items: center; cursor: zoom-out; }
+#zoom img { max-height: 100%; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .js .reveal:not(.in) { opacity: 1; transform: none; }
+}
+</style>
+
+<div class="top">
+  <div class="inner">
+    <a class="mark" href="#inicio">NP</a>
+    <nav aria-label="Secciones">
+      <a href="#portal">Portal</a>
+      <a href="#habilidades">Habilidades</a>
+      <a href="#trabajo">Trabajo</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+  </div>
+  <div id="progress"></div>
+</div>
+
+<main>
+  <section class="hero" id="inicio">
+    <svg class="flow" viewBox="0 0 1200 500" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0 90 C 260 90, 320 250, 600 250 S 960 90, 1200 90"/>
+      <path d="M0 250 C 300 250, 400 250, 600 250 S 900 250, 1200 250"/>
+      <path d="M0 410 C 260 410, 320 250, 600 250 S 960 410, 1200 410"/>
+    </svg>
+    <div class="inner">
+      <span class="eyebrow">Ingeniero en Informática · Temuco, Chile</span>
+      <h1>Nicolás Pérez</h1>
+      <p>Construyo las herramientas internas que una empresa usa cada día y conecto los sistemas que las alimentan.</p>
+      <a class="btn" href="#portal">Ver lo que he hecho</a>
+    </div>
+  </section>
+
+  <div class="strip">
+    <div class="inner">
+      <div><b>Aplicaciones web</b><span>Django y React, de la base de datos a la pantalla</span></div>
+      <div><b>Datos automatizados</b><span>Flujos programados con Airflow y paneles en Looker</span></div>
+      <div><b>Integraciones</b><span>SAP, Salesforce, API REST y SFTP</span></div>
+    </div>
+  </div>
+
+  <section class="band">
+    <div class="inner about">
+      <div class="ghost" aria-hidden="true">2026</div>
+      <div class="reveal left">
+        <span class="eyebrow">Desde febrero de 2026</span>
+        <h2>Un solo portal para todo el equipo</h2>
+        <p class="muted">Levanté un sistema interno para un grupo automotriz con varias sucursales. Reúne en un mismo lugar lo que antes estaba repartido entre sistemas y planillas.</p>
+      </div>
+      <div class="frame reveal">
+        <button class="shot" type="button" aria-label="Ampliar pantalla de inicio de sesión"><img src="assets/login.jpg" alt="Inicio de sesión del portal, con acceso por Google y por contraseña" width="1716" height="876" loading="lazy"></button>
+      </div>
+      <div class="reveal right">
+        <span class="eyebrow">Diseño y desarrollo</span>
+        <div class="signature">Nicolás Pérez</div>
+        <p class="muted">Inicio de sesión con Google o contraseña, accesos por área, control de sesiones y notificaciones en tiempo real.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band tex" id="portal">
+    <div class="inner">
+      <div class="center reveal">
+        <h2>El portal en uso</h2>
+        <p>64 personas registradas y 230 vehículos gestionados en el catálogo de usados.</p>
+      </div>
+      <div class="feature">
+        <div class="main reveal left">
+          <button class="shot" type="button" aria-label="Ampliar catálogo de usados"><img src="assets/catalogo.jpg" alt="Catálogo de usados con filtros, precios, estado de fotos y ofertas" width="1885" height="909" loading="lazy"></button>
+          <div class="copy">
+            <span class="eyebrow">Catálogo de usados</span>
+            <p class="muted">Filtros por marca, sucursal y condición, exportación a Excel, ofertas y sincronización de fotos con una plataforma externa.</p>
+          </div>
+        </div>
+        <div class="side">
+          <div class="mini reveal right">
+            <button class="shot" type="button" aria-label="Ampliar detalle de unidad"><img src="assets/detalle.jpg" alt="Ficha de un vehículo con galería de fotos y vista de 360 grados" width="1845" height="896" loading="lazy"></button>
+            <p>Galería y vista 360°</p>
+          </div>
+          <div class="mini reveal right delay1">
+            <button class="shot" type="button" aria-label="Ampliar panel de administración"><img src="assets/usuarios.jpg" alt="Panel de administración con usuarios, roles y áreas" width="1897" height="900" loading="lazy"></button>
+            <p>Usuarios y accesos</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="habilidades">
+    <div class="inner">
+      <div class="center reveal">
+        <h2>Cubro todo el recorrido</h2>
+        <span class="eyebrow">Lo que uso para construir</span>
+      </div>
+      <div class="skills">
+        <ul>
+          <li class="reveal left"><span class="dot">Py</span><div><b>Backend</b><small>Python, Django, FastAPI, Node.js</small></div></li>
+          <li class="reveal left delay1"><span class="dot">Re</span><div><b>Frontend</b><small>React, Vite, Tailwind, Recharts</small></div></li>
+          <li class="reveal left delay2"><span class="dot">WS</span><div><b>Tiempo real</b><small>Channels, WebSockets, Redis</small></div></li>
+        </ul>
+        <div class="core reveal"><b>De la base de datos a la pantalla</b></div>
+        <ul>
+          <li class="reveal right"><span class="dot">SQL</span><div><b>Datos</b><small>SQL Server, PostgreSQL, MySQL, pandas</small></div></li>
+          <li class="reveal right delay1"><span class="dot">DAG</span><div><b>Automatización</b><small>Airflow, n8n, Power BI, Looker Studio</small></div></li>
+          <li class="reveal right delay2"><span class="dot">Dk</span><div><b>Infraestructura</b><small>Docker, PM2, Nginx, Ubuntu Server</small></div></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="band tex">
+    <div class="inner numbers reveal">
+      <div class="stats">
+        <div><b data-count="24">24</b><span>Módulos de backend</span></div>
+        <div><b data-count="302">302</b><span>Commits en 2026</span></div>
+        <div><b data-count="21">21</b><span>Flujos en Airflow</span></div>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <div class="frame"><button class="shot" type="button" aria-label="Ampliar panel de administración"><img src="assets/usuarios.jpg" alt="Panel de administración" width="1897" height="900" loading="lazy"></button></div>
+          <span class="eyebrow">Paso uno</span>
+          <h3>Entender</h3>
+          <p>Me siento con el área, reviso sus datos y dejo por escrito el proceso real.</p>
+        </div>
+        <div class="step">
+          <div class="frame"><button class="shot" type="button" aria-label="Ampliar catálogo de usados"><img src="assets/catalogo.jpg" alt="Catálogo de usados" width="1885" height="909" loading="lazy"></button></div>
+          <span class="eyebrow">Paso dos</span>
+          <h3>Construir</h3>
+          <p>Convierto ese proceso en una pantalla simple, con permisos para cada perfil.</p>
+        </div>
+        <div class="step">
+          <div class="frame"><button class="shot" type="button" aria-label="Ampliar flujos de Airflow"><img src="assets/airflow.jpg" alt="Flujos programados en Airflow" width="1895" height="911" loading="lazy"></button></div>
+          <span class="eyebrow">Paso tres</span>
+          <h3>Automatizar</h3>
+          <p>Programo las cargas y dejo monitoreo para saber cuándo algo falla.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band alt" id="trabajo">
+    <div class="inner">
+      <div class="tabs reveal" role="tablist" aria-label="Trabajos">
+        <button type="button" role="tab" id="tab-kanban" aria-controls="p-kanban" aria-selected="true">Kanban de taller</button>
+        <button type="button" role="tab" id="tab-datos" aria-controls="p-datos" aria-selected="false">Datos para gerencia</button>
+        <button type="button" role="tab" id="tab-flujos" aria-controls="p-flujos" aria-selected="false">Flujos automáticos</button>
+      </div>
+
+      <div class="pane reveal" id="p-kanban" role="tabpanel" aria-labelledby="tab-kanban">
+        <div class="frame">
+          <div class="kanban" id="kanban">
+            <div class="kcol"><b>Recepción</b><div class="kcard">OT 1042<i>Parachoques</i></div><div class="kcard">OT 1043<i>Puerta</i></div></div>
+            <div class="kcol"><b>Ejecución</b><div class="kcard">OT 1039<i>Capó</i></div></div>
+            <div class="kcol"><b>Liquidación</b><div class="kcard">OT 1036<i>Tapabarro</i></div></div>
+            <div class="kcol"><b>Entrega</b></div>
+          </div>
+          <p class="demo-note">Animación ilustrativa con datos de ejemplo.</p>
+        </div>
+        <div class="copy">
+          <h3>El taller a la vista</h3>
+          <p class="muted">Tablero de órdenes de desabolladura y pintura, con manual de uso propio.</p>
+          <ul>
+            <li>Perfiles con distintos permisos</li>
+            <li>Tiempo por etapa y pausas</li>
+            <li>Filtros, búsqueda y asignación de técnicos</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pane" id="p-datos" role="tabpanel" aria-labelledby="tab-datos" hidden>
+        <div class="frame"><button class="shot" type="button" aria-label="Ampliar carga hacia Looker"><img src="assets/looker.jpg" alt="Pantalla de homologaciones y carga de forecast para el estado de resultados" width="1898" height="899" loading="lazy"></button></div>
+        <div class="copy">
+          <h3>El estado de resultados</h3>
+          <p class="muted">Finanzas mantiene las homologaciones en una pantalla y el panel de Looker se actualiza solo.</p>
+          <ul>
+            <li>177.679 filas de forecast procesadas</li>
+            <li>9.990 proveedores en el maestro</li>
+            <li>Carga por archivo o edición en línea</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pane" id="p-flujos" role="tabpanel" aria-labelledby="tab-flujos" hidden>
+        <div class="frame"><button class="shot" type="button" aria-label="Ampliar flujos de Airflow"><img src="assets/airflow.jpg" alt="Lista de flujos de datos programados en Airflow" width="1895" height="911" loading="lazy"></button></div>
+        <div class="copy">
+          <h3>Datos que llegan solos</h3>
+          <p class="muted">Procesos programados que mueven información entre sistemas, desde cada cinco minutos hasta una vez al día.</p>
+          <ul>
+            <li>21 flujos, 19 activos</li>
+            <li>Catálogos, finanzas, leads y envíos a marcas</li>
+            <li>Salesforce, API, PostgreSQL y SFTP</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="inner">
+      <div class="center reveal">
+        <h2>Problemas difíciles, bien resueltos</h2>
+        <span class="eyebrow">Trabajo que no se ve en pantalla</span>
+      </div>
+      <div class="cases">
+        <article class="case reveal">
+          <div class="big">~430</div>
+          <span class="tag">Tablas mapeadas</span>
+          <h3>Una base sin documentar</h3>
+          <p>Reconstruí el modelo de datos del sistema de gestión y lo convertí en una base de conocimiento para trabajar con asistentes de IA.</p>
+        </article>
+        <article class="case reveal delay1">
+          <div class="big">9</div>
+          <span class="tag">Facturas afectadas por un error</span>
+          <h3>Asientos vacíos en SAP</h3>
+          <p>Un <code>INNER JOIN</code> exigía repuestos y dejaba fuera las órdenes con solo servicios externos. Encontré la causa y corregí el mismo patrón en otros procedimientos.</p>
+        </article>
+        <article class="case reveal delay2">
+          <div class="big">1</div>
+          <span class="tag">Proceso para varias redes</span>
+          <h3>Un pipeline para varias redes</h3>
+          <p>Un solo proceso envía órdenes, repuestos, stock y ventas, con un perfil por red en lugar de un script por marca.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="band tex" id="trayectoria">
+    <div class="inner">
+      <div class="center reveal">
+        <h2>Trayectoria</h2>
+      </div>
+      <div class="timeline">
+        <article class="reveal left">
+          <span class="when">Mar 2025 – Actualidad</span>
+          <h3>Ingeniero Informático</h3>
+          <span class="tag">Automotriz Portillo Sur</span>
+          <p>Diseño, desarrollo y puesta en producción de la plataforma interna, pipelines de datos, API REST y reportería financiera.</p>
+        </article>
+        <article class="reveal right">
+          <span class="when">2021 – 2025</span>
+          <h3>Ingeniero en Informática</h3>
+          <span class="tag">INACAP Temuco · Titulado</span>
+          <p>Con especializaciones en desarrollo full stack (2024), diseño y gestión de bases de datos (2022) y soporte computacional (2022).</p>
+        </article>
+        <article class="reveal left">
+          <span class="when">Nov 2020 – Feb 2021</span>
+          <h3>Asistente Informático y Administrativo</h3>
+          <span class="tag">MiWifiPro</span>
+          <p>Gestión de clientes en CRM, apoyo técnico, atención al cliente y reportes mensuales.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="band alt">
+    <div class="inner">
+      <div class="center reveal">
+        <h2>Herramientas del día a día</h2>
+      </div>
+      <div class="tools reveal">
+        <div class="tool"><div class="disc"><img src="assets/postgresql.webp" alt="" loading="lazy"></div><b>PostgreSQL</b></div>
+        <div class="tool"><div class="disc dark"><img src="assets/airflow.png" alt="" loading="lazy"></div><b>Airflow</b></div>
+        <div class="tool"><div class="disc"><img src="assets/cloudinary.png" alt="" loading="lazy"></div><b>Cloudinary</b></div>
+        <div class="tool"><div class="disc">Dj</div><b>Django</b></div>
+        <div class="tool"><div class="disc">Re</div><b>React</b></div>
+        <div class="tool"><div class="disc">Dk</div><b>Docker</b></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer id="contacto">
+  <div class="inner">
+    <h2>Conversemos</h2>
+    <p class="email">nicoperezperez0@gmail.com</p>
+    <div class="contact">
+      <button class="btn" type="button" id="copy">Copiar correo</button>
+      <a class="btn ghost-btn" href="https://www.linkedin.com/in/nicol%C3%A1s-p%C3%A9rez-b609a1263" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn ghost-btn" href="https://github.com/DrackPrez" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<div id="zoom" hidden><img alt="Pantalla ampliada"></div>
+
+<script>
+(function () {
+  document.documentElement.classList.add("js");
+  var calm = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  function countUp(el) {
+    var end = +el.dataset.count, start = performance.now();
+    (function tick(now) {
+      var t = Math.min((now - start) / 1100, 1);
+      el.textContent = Math.round(end * (1 - Math.pow(1 - t, 3)));
+      if (t < 1) requestAnimationFrame(tick);
+    })(start);
+  }
+
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      e.target.classList.add("in");
+      io.unobserve(e.target);
+      if (!calm) e.target.querySelectorAll("[data-count]").forEach(countUp);
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll(".reveal").forEach(function (el) { io.observe(el); });
+
+  var bar = document.getElementById("progress");
+  function progress() {
+    var max = document.documentElement.scrollHeight - innerHeight;
+    bar.style.transform = "scaleX(" + (max > 0 ? scrollY / max : 0) + ")";
+  }
+  addEventListener("scroll", progress, { passive: true });
+  progress();
+
+  var tabs = document.querySelectorAll('[role="tab"]');
+  tabs.forEach(function (tab) {
+    tab.addEventListener("click", function () {
+      tabs.forEach(function (t) {
+        var on = t === tab;
+        t.setAttribute("aria-selected", on);
+        var pane = document.getElementById(t.getAttribute("aria-controls"));
+        pane.hidden = !on;
+        pane.classList.add("in");
+      });
+    });
+  });
+
+  var copy = document.getElementById("copy");
+  copy.addEventListener("click", function () {
+    var mail = document.querySelector(".email");
+    navigator.clipboard.writeText(mail.textContent).then(function () {
+      copy.textContent = "Correo copiado";
+    }).catch(function () {
+      getSelection().selectAllChildren(mail);
+      copy.textContent = "Correo seleccionado";
+    });
+  });
+
+  var zoom = document.getElementById("zoom"), big = zoom.querySelector("img");
+  document.querySelectorAll(".shot").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var img = b.querySelector("img");
+      big.src = img.src; big.alt = img.alt;
+      zoom.hidden = false;
+    });
+  });
+  function closeZoom() { zoom.hidden = true; }
+  zoom.addEventListener("click", closeZoom);
+  addEventListener("keydown", function (e) { if (e.key === "Escape") closeZoom(); });
+
+  if (!calm) {
+    var cols = document.querySelectorAll("#kanban .kcol");
+    setInterval(function () {
+      if (document.getElementById("p-kanban").hidden) return;
+      for (var i = cols.length - 2; i >= 0; i--) {
+        var cards = cols[i].querySelectorAll(".kcard");
+        if (cards.length) {
+          var card = cards[cards.length - 1];
+          var fresh = card.cloneNode(true);
+          card.remove();
+          cols[i + 1].appendChild(fresh);
+          break;
+        }
+      }
+      var last = cols[cols.length - 1].querySelectorAll(".kcard");
+      if (last.length > 2 || !document.querySelector("#kanban .kcol:not(:last-child) .kcard")) {
+        var moved = last[0];
+        if (moved) { moved.remove(); cols[0].appendChild(moved.cloneNode(true)); }
+      }
+    }, 1900);
+  }
+})();
+</script>
+</body></html>
