@@ -218,9 +218,17 @@ footer .inner { display: grid; gap: 1rem; justify-items: center; }
 .win-copy .tag { font: 600 .8rem/1.2 var(--label); letter-spacing: .16em; text-transform: uppercase; color: var(--cyan); }
 .win-copy p { color: var(--muted); font-size: 1rem; }
 #win-close { position: absolute; top: .6rem; right: .6rem; z-index: 1; width: 2.4rem; height: 2.4rem; border: 0; background: var(--cyan); color: var(--cyan-ink); font: 700 1.4rem/1 var(--body); cursor: pointer; }
-.feats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; }
+.feats { display: flex; gap: 1.5rem; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
+.feats::-webkit-scrollbar { display: none; }
+.feat { flex: 0 0 100%; scroll-snap-align: start; }
+.chips { display: flex; flex-wrap: wrap; justify-content: center; gap: .5rem; margin-bottom: 1.4rem; }
+.chip { background: none; border: 1px solid var(--line); color: var(--muted); font: 600 .9rem/1.2 var(--label); letter-spacing: .1em; text-transform: uppercase; padding: .6rem .9rem; cursor: pointer; transition: color .2s, border-color .2s, background .2s; }
+.chip:hover { color: var(--fg); border-color: var(--cyan); }
+.chip[aria-pressed="true"] { background: var(--cyan); border-color: var(--cyan); color: var(--cyan-ink); }
+.frame.duo { display: grid; gap: .6rem; }
+.feat.wide .frame.duo .shot img { aspect-ratio: 2.1 / 1; }
 .feat { background: var(--panel); padding: 1rem 1rem 1.3rem; display: grid; gap: .6rem; align-content: start; min-width: 0; cursor: pointer; transition: box-shadow .2s, transform .2s; }
-.feat:hover, .feat:focus-within { box-shadow: 0 0 0 2px var(--cyan), 0 18px 40px rgba(34,184,226,.25); transform: translateY(-5px); }
+.feat:hover, .feat:focus-within { box-shadow: inset 0 0 0 2px var(--cyan); }
 .feat .frame { padding: 0; box-shadow: none; border: 0; }
 .feat .shot img { aspect-ratio: 2 / 1; object-fit: cover; object-position: top left; }
 .feat .tag { font: 600 .8rem/1.2 var(--label); letter-spacing: .16em; text-transform: uppercase; color: var(--cyan); margin-top: .3rem; }
@@ -239,7 +247,6 @@ footer .inner { display: grid; gap: 1rem; justify-items: center; }
 .win-case h4 { margin: 0 0 .25rem; font: 600 .9rem/1.2 var(--label); letter-spacing: .13em; text-transform: uppercase; color: var(--cyan); }
 .win-case p, .win-case ul { color: var(--muted); font-size: .96rem; }
 .win-case ul { margin: 0; padding-left: 1.05rem; }
-@media (max-width: 900px) { .feats { grid-template-columns: 1fr; } }
 @media (max-width: 620px) { .win-case { grid-template-columns: 1fr; } }
 
 .apps { padding-top: .7rem; }
@@ -293,10 +300,11 @@ footer .inner { display: grid; gap: 1rem; justify-items: center; }
     <div class="inner">
       <div class="center reveal">
         <h2>Casos destacados</h2>
-        <p>Cinco proyectos que resumen cómo trabajo.</p>
+        <p>Cinco proyectos que resumen cómo trabajo. Elige uno o desliza para ver el siguiente.</p>
       </div>
+      <div class="chips" aria-label="Elegir caso"><button type="button" class="chip" data-i="0" aria-pressed="true">Portal central</button><button type="button" class="chip" data-i="1" aria-pressed="false">Catálogo y API</button><button type="button" class="chip" data-i="2" aria-pressed="false">Base para Looker</button><button type="button" class="chip" data-i="3" aria-pressed="false">Monitoreo</button><button type="button" class="chip" data-i="4" aria-pressed="false">Gestión del trabajo</button></div>
       <div class="feats">
-        <article class="feat reveal">
+        <article class="feat wide">
           <div class="frame"><button class="shot" type="button" aria-label="Ver caso: Portal central de la empresa"><img src="assets/dashboard.jpg" alt="Portal central de la empresa" width="1176" height="836" loading="lazy"></button></div>
           <span class="tag">Plataforma</span>
           <h3>Portal central de la empresa</h3>
@@ -310,7 +318,7 @@ footer .inner { display: grid; gap: 1rem; justify-items: center; }
             <section><h4>Resultado</h4><ul><li>21 módulos disponibles y 64 personas registradas.</li><li>Más de 300 commits desde febrero de 2026.</li></ul></section>
           </div>
         </article>
-        <article class="feat reveal delay1">
+        <article class="feat wide">
           <div class="frame"><button class="shot" type="button" aria-label="Ver caso: Catálogo de vehículos y API para la web"><img src="assets/catalogo.jpg" alt="Catálogo de vehículos y API para la web" width="1176" height="836" loading="lazy"></button></div>
           <span class="tag">Datos e integración</span>
           <h3>Catálogo de vehículos y API para la web</h3>
@@ -324,7 +332,7 @@ footer .inner { display: grid; gap: 1rem; justify-items: center; }
             <section><h4>Resultado</h4><ul><li>Nuevos y usados quedaron centralizados en un mismo sistema.</li><li>Gestión interna edita y la web muestra esa información mediante una API administrada por mí.</li></ul></section>
           </div>
         </article>
-        <article class="feat reveal delay2">
+        <article class="feat wide">
           <div class="frame"><button class="shot" type="button" aria-label="Ver caso: Base de datos que alimenta Looker"><img src="assets/looker.jpg" alt="Base de datos que alimenta Looker" width="1176" height="836" loading="lazy"></button></div>
           <span class="tag">Automatización</span>
           <h3>Base de datos que alimenta Looker</h3>
@@ -338,22 +346,22 @@ footer .inner { display: grid; gap: 1rem; justify-items: center; }
             <section><h4>Resultado</h4><ul><li>El estado de resultados se actualiza tres veces al día.</li><li>Cada ejecución queda registrada para revisarla desde el portal.</li></ul></section>
           </div>
         </article>
-        <article class="feat reveal">
-          <div class="frame"><button class="shot" type="button" aria-label="Ver caso: Monitoreo centralizado de integraciones"><img src="assets/monitoreo.jpg" alt="Monitoreo centralizado de integraciones" width="1176" height="836" loading="lazy"></button></div>
+        <article class="feat wide">
+          <div class="frame"><button class="shot" type="button" aria-label="Ver caso: Monitoreo de API y calidad de datos"><img src="assets/monitoreo.jpg" alt="Monitoreo de API y calidad de datos" width="1176" height="836" loading="lazy"></button></div>
           <span class="tag">Monitoreo</span>
-          <h3>Monitoreo centralizado de integraciones</h3>
-          <p>Un solo lugar para ver qué se envió, cuándo y qué falló, con el detalle exacto del error.</p>
+          <h3>Monitoreo de API y calidad de datos</h3>
+          <p>Monitoreo las API y la calidad de la información que se carga a nuestro DMS, con el detalle exacto de cada error.</p>
           <ul class="facts"><li><b>1.053</b><span>llamadas a SAP registradas</span></li><li><b>3</b><span>integraciones monitoreadas</span></li></ul>
           <span class="more">Ver caso completo →</span>
           <div class="case-body" hidden>
-            <section><h4>El problema</h4><p>Para saber qué pasó con un envío o con un dato había que tener a la vista información repartida entre distintas integraciones y sistemas.</p></section>
-            <section><h4>Mi rol</h4><p>Monitoreo y modelo las API: entro a la base de datos, tomo lo que necesito y construyo las pantallas de seguimiento.</p></section>
+            <section><h4>El problema</h4><p>Hacía falta ver en un solo lugar qué se envía por las API, cuándo se envía y si la información que entra al DMS llega bien.</p></section>
+            <section><h4>Mi rol</h4><p>Monitoreo y modelo las API, y reviso la calidad de los datos: entro a la base, tomo lo que necesito y construyo las pantallas de seguimiento.</p></section>
             <section><h4>Decisiones clave</h4><ul><li>Generar la API a partir de un SELECT con la información necesaria.</li><li>Registrar cada envío con su hora, archivo enviado y resultado.</li><li>Reunir los errores en un sistema centralizado, con su detalle exacto.</li></ul></section>
-            <section><h4>Resultado</h4><ul><li>Los errores se pueden revisar al detalle exacto.</li><li>Las integraciones con SAP, Crossover y Astara se siguen desde el portal.</li><li>El monitoreo se conecta con la calidad de datos de clientes: teléfonos, correos, RUT y dirección.</li></ul></section>
+            <section><h4>Resultado</h4><ul><li>Los errores se pueden revisar al detalle exacto.</li><li>Las integraciones con SAP, Crossover y Astara se siguen desde el portal.</li><li>La calidad de la información cargada al DMS se revisa en teléfonos, correos, RUT y dirección de clientes.</li></ul></section>
           </div>
         </article>
-        <article class="feat wide reveal">
-          <div class="frame"><button class="shot" type="button" aria-label="Ver caso: Gestión y orden del trabajo"><img src="assets/proyectos.jpg" alt="Gestión y orden del trabajo" width="1176" height="836" loading="lazy"></button></div>
+        <article class="feat wide">
+          <div class="frame duo"><button class="shot" type="button" aria-label="Ver caso: Gestión y orden del trabajo"><img src="assets/proyectos.jpg" alt="Gestión y orden del trabajo" width="1176" height="836" loading="lazy"></button><button class="shot" type="button" aria-label="Ampliar: panel de requerimientos"><img src="assets/requerimientos.jpg" alt="Panel de requerimientos por etapa y semana" loading="lazy"></button></div>
           <span class="tag">Gestión</span>
           <h3>Gestión y orden del trabajo</h3>
           <p>Creo herramientas acordes a cada caso para ordenar el flujo de trabajo, definir mejor los proyectos y dar seguimiento a los problemas.</p>
@@ -366,6 +374,11 @@ footer .inner { display: grid; gap: 1rem; justify-items: center; }
             <section><h4>Resultado</h4><ul><li>Los proyectos quedan mejor definidos y con seguimiento.</li><li>Cada problema muestra su estado y el tiempo que lleva en él.</li><li>54 proyectos y 84 tickets ordenados en un mismo portal.</li></ul></section>
           </div>
         </article>
+      </div>
+      <div class="car-ctl">
+        <button type="button" id="cas-prev" aria-label="Caso anterior">←</button>
+        <span id="cas-count">1 / 5</span>
+        <button type="button" id="cas-next" aria-label="Caso siguiente">→</button>
       </div>
     </div>
   </section>
@@ -708,6 +721,19 @@ footer .inner { display: grid; gap: 1rem; justify-items: center; }
     }
     count.textContent = (Math.round(pos / w) % cards.length + 1) + " / " + cards.length;
   }, 33);
+
+  var feats = document.querySelector(".feats"), slides = feats.querySelectorAll(".feat"), chipEls = document.querySelectorAll(".chip"), casCount = document.getElementById("cas-count");
+  function casWidth() { return slides[0].offsetWidth + parseFloat(getComputedStyle(feats).columnGap); }
+  function casIndex() { return Math.round(feats.scrollLeft / casWidth()); }
+  function casGo(i) { feats.scrollTo({ left: ((i + slides.length) % slides.length) * casWidth(), behavior: calm ? "auto" : "smooth" }); }
+  chipEls.forEach(function (c) { c.addEventListener("click", function () { casGo(+c.dataset.i); }); });
+  document.getElementById("cas-prev").addEventListener("click", function () { casGo(casIndex() - 1); });
+  document.getElementById("cas-next").addEventListener("click", function () { casGo(casIndex() + 1); });
+  setInterval(function () {
+    var i = casIndex();
+    casCount.textContent = (i + 1) + " / " + slides.length;
+    chipEls.forEach(function (c, n) { c.setAttribute("aria-pressed", n === i ? "true" : "false"); });
+  }, 150);
 
   var copy = document.getElementById("copy");
   copy.addEventListener("click", function () {
