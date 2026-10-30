@@ -218,11 +218,11 @@ footer .inner { display: grid; gap: 1rem; justify-items: center; }
 .win-copy .tag { font: 600 .8rem/1.2 var(--label); letter-spacing: .16em; text-transform: uppercase; color: var(--cyan); }
 .win-copy p { color: var(--muted); font-size: 1rem; }
 #win-close { position: absolute; top: .6rem; right: .6rem; z-index: 1; width: 2.4rem; height: 2.4rem; border: 0; background: var(--cyan); color: var(--cyan-ink); font: 700 1.4rem/1 var(--body); cursor: pointer; }
-.feats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem; }
+.feats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; }
 .feat { background: var(--panel); padding: 1rem 1rem 1.3rem; display: grid; gap: .6rem; align-content: start; min-width: 0; cursor: pointer; transition: box-shadow .2s, transform .2s; }
 .feat:hover, .feat:focus-within { box-shadow: 0 0 0 2px var(--cyan), 0 18px 40px rgba(34,184,226,.25); transform: translateY(-5px); }
 .feat .frame { padding: 0; box-shadow: none; border: 0; }
-.feat .shot img { aspect-ratio: 1176 / 836; object-fit: cover; object-position: top left; }
+.feat .shot img { aspect-ratio: 2 / 1; object-fit: cover; object-position: top left; }
 .feat .tag { font: 600 .8rem/1.2 var(--label); letter-spacing: .16em; text-transform: uppercase; color: var(--cyan); margin-top: .3rem; }
 .feat > p { color: var(--muted); font-size: 1rem; }
 .facts { list-style: none; margin: .2rem 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: .4rem 1.6rem; }
@@ -288,7 +288,7 @@ footer .inner { display: grid; gap: 1rem; justify-items: center; }
     <div class="inner">
       <div class="center reveal">
         <h2>Casos destacados</h2>
-        <p>Tres proyectos que resumen cómo trabajo.</p>
+        <p>Cuatro proyectos que resumen cómo trabajo.</p>
       </div>
       <div class="feats">
         <article class="feat reveal">
@@ -331,6 +331,20 @@ footer .inner { display: grid; gap: 1rem; justify-items: center; }
             <section><h4>Mi rol</h4><p>Automaticé los procesos y gestiono la información que llega a los paneles de gerencia.</p></section>
             <section><h4>Decisiones clave</h4><ul><li>Pipelines programados en Airflow que limpian, homologan y calculan márgenes.</li><li>Los dos últimos meses se recargan y los anteriores quedan congelados, porque una orden puede seguir cambiando después de facturada.</li><li>Finanzas ajusta las homologaciones desde una pantalla.</li></ul></section>
             <section><h4>Resultado</h4><ul><li>El estado de resultados se actualiza tres veces al día.</li><li>Cada ejecución queda registrada para revisarla desde el portal.</li></ul></section>
+          </div>
+        </article>
+        <article class="feat reveal">
+          <div class="frame"><button class="shot" type="button" aria-label="Ver caso: Monitoreo centralizado de integraciones"><img src="assets/monitoreo.jpg" alt="Monitoreo centralizado de integraciones" width="1176" height="836" loading="lazy"></button></div>
+          <span class="tag">Monitoreo</span>
+          <h3>Monitoreo centralizado de integraciones</h3>
+          <p>Un solo lugar para ver qué se envió, cuándo y qué falló, con el detalle exacto del error.</p>
+          <ul class="facts"><li><b>1.053</b><span>llamadas a SAP registradas</span></li><li><b>3</b><span>integraciones monitoreadas</span></li></ul>
+          <span class="more">Ver caso completo →</span>
+          <div class="case-body" hidden>
+            <section><h4>El problema</h4><p>Para saber qué pasó con un envío o con un dato había que tener a la vista información repartida entre distintas integraciones y sistemas.</p></section>
+            <section><h4>Mi rol</h4><p>Monitoreo y modelo las API: entro a la base de datos, tomo lo que necesito y construyo las pantallas de seguimiento.</p></section>
+            <section><h4>Decisiones clave</h4><ul><li>Generar la API a partir de un SELECT con la información necesaria.</li><li>Registrar cada envío con su hora, archivo enviado y resultado.</li><li>Reunir los errores en un sistema centralizado, con su detalle exacto.</li></ul></section>
+            <section><h4>Resultado</h4><ul><li>Los errores se pueden revisar al detalle exacto.</li><li>Las integraciones con SAP, Crossover y Astara se siguen desde el portal.</li><li>El monitoreo se conecta con la calidad de datos de clientes: teléfonos, correos, RUT y dirección.</li></ul></section>
           </div>
         </article>
       </div>
