@@ -260,6 +260,18 @@ nav a:hover { color: var(--cyan); }
 .edu p { color: var(--muted); font-size: .96rem; }
 @media (max-width: 860px) { .edu { grid-template-columns: minmax(0, 1fr); } }
 
+.hero .inner.hero-grid { grid-template-columns: minmax(0, 1fr) auto; gap: 3.5rem; align-items: center; justify-items: start; text-align: left; }
+.hero-text { display: grid; gap: 1.4rem; justify-items: start; min-width: 0; }
+.hero .hero-cta { justify-content: flex-start; }
+.hero-photo { width: 17.5rem; aspect-ratio: 4 / 5; object-fit: cover; display: block; box-shadow: 1.1rem 1.1rem 0 var(--cyan); }
+.hero { padding-block: 5rem 5.5rem; }
+@media (max-width: 860px) {
+  .hero .inner.hero-grid { grid-template-columns: minmax(0, 1fr); justify-items: center; text-align: center; gap: 2.2rem; }
+  .hero-text { justify-items: center; }
+  .hero .hero-cta { justify-content: center; }
+  .hero-photo { width: 12rem; order: -1; box-shadow: .7rem .7rem 0 var(--cyan); }
+}
+
 footer { background: var(--ink); border-top: 1px solid var(--line); text-align: center; padding-block: 4rem; }
 footer .inner { display: grid; gap: 1rem; justify-items: center; }
 
@@ -343,11 +355,14 @@ footer .inner { display: grid; gap: 1rem; justify-items: center; }
       <path d="M0 250 C 300 250, 400 250, 600 250 S 900 250, 1200 250"/>
       <path d="M0 410 C 260 410, 320 250, 600 250 S 960 410, 1200 410"/>
     </svg>
-    <div class="inner">
+    <div class="inner hero-grid">
+      <div class="hero-text">
       <span class="eyebrow">Líder de Sistemas Core · Temuco, Chile</span>
       <h1>Nicolás Pérez</h1>
       <p>Lidera los sistemas core de un grupo automotriz: crea sus herramientas internas, conecta sus plataformas y automatiza lo que antes se hacía a mano.</p>
       <div class="hero-cta"><a class="btn" href="#casos">Ver casos destacados</a><a class="btn ghost-btn" href="#contacto">Contactar</a></div>
+      </div>
+      <img class="hero-photo" src="assets/nicolas.jpg" alt="Foto de Nicolás Pérez" width="640" height="800">
     </div>
   </section>
   
