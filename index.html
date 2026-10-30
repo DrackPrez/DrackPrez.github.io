@@ -247,6 +247,12 @@ nav a:hover { color: var(--cyan); }
 }
 @media (max-width: 480px) { .thumb { grid-template-columns: 1fr; } .thumb img { height: 3.6rem; } .thumb span { padding: .2rem .4rem .4rem; } }
 
+.thumbs.many { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: .45rem; }
+.thumbs.many .thumb { grid-template-columns: minmax(0, 1fr); gap: .2rem; align-content: start; }
+.thumbs.many .thumb img { height: 3rem; }
+.thumbs.many .thumb span { font-size: .68rem; letter-spacing: .03em; padding: .15rem .3rem .3rem; }
+@media (max-width: 620px) { .thumbs.many { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+
 footer { background: var(--ink); border-top: 1px solid var(--line); text-align: center; padding-block: 4rem; }
 footer .inner { display: grid; gap: 1rem; justify-items: center; }
 
@@ -441,17 +447,17 @@ footer .inner { display: grid; gap: 1rem; justify-items: center; }
           </div>
         </article>
         <article class="feat wide">
-          <div class="frame gal"><button class="shot" type="button" aria-label="Ampliar imagen"><img src="assets/proyectos.jpg" alt="Gestión de proyectos" loading="lazy"></button><div class="thumbs"><button type="button" class="thumb" aria-pressed="true"><img src="assets/proyectos.jpg" alt="Gestión de proyectos" loading="lazy"><span>Gestión de proyectos</span></button><button type="button" class="thumb" aria-pressed="false"><img src="assets/requerimientos.jpg" alt="Panel de requerimientos" loading="lazy"><span>Panel de requerimientos</span></button></div></div>
+          <div class="frame gal"><button class="shot" type="button" aria-label="Ampliar imagen"><img src="assets/proyectos.jpg" alt="Gestión de proyectos" loading="lazy"></button><div class="thumbs many"><button type="button" class="thumb" aria-pressed="true"><img src="assets/proyectos.jpg" alt="Gestión de proyectos" loading="lazy"><span>Gestión de proyectos</span></button><button type="button" class="thumb" aria-pressed="false"><img src="assets/requerimientos.jpg" alt="Panel de requerimientos" loading="lazy"><span>Panel de requerimientos</span></button><button type="button" class="thumb" aria-pressed="false"><img src="assets/reqlista.jpg" alt="Lista de requerimientos" loading="lazy"><span>Lista de requerimientos</span></button><button type="button" class="thumb" aria-pressed="false"><img src="assets/gantt.jpg" alt="Carta Gantt" loading="lazy"><span>Carta Gantt</span></button><button type="button" class="thumb" aria-pressed="false"><img src="assets/tareas.jpg" alt="Tareas del equipo" loading="lazy"><span>Tareas del equipo</span></button></div></div>
           <span class="tag">Gestión</span>
           <h3>Gestión y orden del trabajo</h3>
           <p>Creo herramientas acordes a cada caso para ordenar el flujo de trabajo, definir mejor los proyectos y dar seguimiento a los problemas.</p>
-          <ul class="facts"><li><b>54</b><span>proyectos registrados</span></li><li><b>84</b><span>tickets en seguimiento</span></li></ul>
+          <ul class="facts"><li><b>54</b><span>proyectos registrados</span></li><li><b>84</b><span>tickets en seguimiento</span></li><li><b>108</b><span>requerimientos</span></li></ul>
           <ul class="tech"><li>Django</li><li>React</li><li>Jira</li><li>Diagramas de flujo</li></ul>
           <span class="more">Ver caso completo →</span>
           <div class="case-body" hidden>
             <section><h4>El problema</h4><p>Hacía falta definir mejor los proyectos, dar seguimiento a las problemáticas y llevar control de los tiempos.</p></section>
             <section><h4>Mi rol</h4><p>Genero las herramientas acordes a cada caso para mejorar el flujo de trabajo del equipo.</p></section>
-            <section><h4>Decisiones clave</h4><ul><li>Gestión de proyectos con requerimientos, responsables, esfuerzo estimado, cronograma y bitácora.</li><li>Tickets sincronizados con Jira, con avisos de novedades y de los que llevan días sin avanzar.</li><li>Diagramas de flujo para documentar cómo funciona cada proceso.</li></ul></section>
+            <section><h4>Decisiones clave</h4><ul><li>Gestión de proyectos con requerimientos, responsables, esfuerzo estimado, cronograma y bitácora.</li><li>Tickets sincronizados con Jira, con avisos de novedades y de los que llevan días sin avanzar.</li><li>Requerimientos con bitácora, carta Gantt y tareas del equipo.</li><li>Diagramas de flujo para documentar cómo funciona cada proceso.</li></ul></section>
             <section><h4>Resultado</h4><ul><li>Los proyectos quedan mejor definidos y con seguimiento.</li><li>Cada problema muestra su estado y el tiempo que lleva en él.</li><li>54 proyectos y 84 tickets ordenados en un mismo portal.</li></ul></section>
           </div>
         </article>
