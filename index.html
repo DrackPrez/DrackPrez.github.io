@@ -569,6 +569,7 @@ footer .inner { display: grid; gap: 1rem; justify-items: center; }
     });
   });
 
+  var zoom = document.getElementById("zoom");
   var apps = document.querySelector(".apps"), cards = apps.querySelectorAll(".app");
   var prev = document.getElementById("car-prev"), next = document.getElementById("car-next"), count = document.getElementById("car-count");
   function current() { return Math.round(apps.scrollLeft / (cards[0].offsetWidth + parseFloat(getComputedStyle(apps).columnGap))); }
@@ -580,8 +581,25 @@ footer .inner { display: grid; gap: 1rem; justify-items: center; }
     next.disabled = end;
   }
   function move(dir) { apps.scrollBy({ left: dir * (cards[0].offsetWidth + parseFloat(getComputedStyle(apps).columnGap)), behavior: calm ? "auto" : "smooth" }); }
-  prev.addEventListener("click", function () { move(-1); });
-  next.addEventListener("click", function () { move(1); });
+  var hold = false, resume = 0;
+  function pause() { resume = Date.now() + 6000; }
+  prev.addEventListener("click", function () { pause(); move(-1); });
+  next.addEventListener("click", function () { pause(); move(1); });
+  [apps, prev, next].forEach(function (el) {
+    el.addEventListener("mouseenter", function () { hold = true; });
+    el.addEventListener("mouseleave", function () { hold = false; });
+  });
+  apps.addEventListener("focusin", function () { hold = true; });
+  apps.addEventListener("focusout", function () { hold = false; });
+  apps.addEventListener("touchstart", pause, { passive: true });
+  if (!calm) {
+    setInterval(function () {
+      var r = apps.getBoundingClientRect();
+      if (hold || Date.now() < resume || document.hidden || !zoom.hidden || r.bottom < 0 || r.top > innerHeight) return;
+      if (next.disabled) apps.scrollTo({ left: 0, behavior: "smooth" });
+      else move(1);
+    }, 3500);
+  }
   apps.addEventListener("scroll", carousel, { passive: true });
   addEventListener("resize", carousel);
   setInterval(carousel, 300);
@@ -598,7 +616,7 @@ footer .inner { display: grid; gap: 1rem; justify-items: center; }
     });
   });
 
-  var zoom = document.getElementById("zoom"), big = zoom.querySelector("img");
+  var big = zoom.querySelector("img");
   document.querySelectorAll(".shot").forEach(function (b) {
     b.addEventListener("click", function () {
       var img = b.querySelector("img");
