@@ -236,7 +236,7 @@ footer .inner { display: grid; gap: 1rem; justify-items: center; }
 .facts { list-style: none; margin: .2rem 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: .4rem 1.6rem; }
 .facts b { display: block; font: 400 1.7rem/1.1 var(--display); color: var(--cyan); font-variant-numeric: tabular-nums; }
 .facts span { font-size: .85rem; color: var(--muted); }
-.feat.wide { grid-column: 1 / -1; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); column-gap: 1.6rem; }
+.feat.wide { align-content: center; grid-column: 1 / -1; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); column-gap: 1.6rem; }
 .feat.wide .frame { grid-row: 1 / span 6; }
 .feat.wide .shot img { aspect-ratio: 1176 / 700; }
 .feat.wide > :not(.frame) { grid-column: 2; }
