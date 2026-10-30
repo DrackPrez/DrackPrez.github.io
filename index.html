@@ -225,6 +225,28 @@ nav a:hover { color: var(--cyan); }
 .hero .ghost-btn, .contact .ghost-btn { background: none; color: var(--cyan); border: 1px solid var(--cyan); }
 @media (max-width: 600px) { nav a.opt { display: none; } }
 
+.feat.wide { grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); column-gap: 2rem; padding: 1.3rem; background: linear-gradient(135deg, var(--panel), #1b1c30); border: 1px solid var(--line); }
+.feat.wide .frame.gal { grid-row: 1 / span 7; display: grid; gap: .6rem; align-content: start; background: none; }
+.feat.wide .gal .shot img { aspect-ratio: 16 / 10; object-fit: cover; object-position: top; border: 1px solid var(--line); }
+.thumbs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .6rem; }
+.thumb { padding: 0; background: var(--ink); border: 1px solid var(--line); color: var(--muted); cursor: pointer; display: grid; grid-template-columns: 4.6rem minmax(0, 1fr); align-items: center; gap: .6rem; text-align: left; transition: border-color .2s, color .2s; }
+.thumb img { display: block; width: 100%; height: 3.2rem; object-fit: cover; object-position: top; }
+.thumb span { font: 600 .78rem/1.2 var(--label); letter-spacing: .06em; text-transform: uppercase; padding-right: .4rem; }
+.thumb:hover, .thumb[aria-pressed="true"] { border-color: var(--cyan); color: var(--fg); }
+.feat.wide h3 { font-size: 1.85rem; }
+.feat.wide > p { font-size: 1.04rem; }
+.feat .facts { padding-block: .7rem; border-block: 1px solid var(--line); margin-top: .3rem; }
+.tech { list-style: none; margin: .2rem 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: .35rem; }
+.tech li { font: 400 .74rem/1 var(--mono); color: var(--muted); border: 1px solid var(--line); padding: .32rem .45rem; }
+.feat .more { justify-self: start; border: 1px solid var(--cyan); padding: .65rem .85rem; margin-top: .5rem; transition: background .2s, color .2s; }
+.feat:hover .more { background: var(--cyan); color: var(--cyan-ink); }
+@media (max-width: 900px) {
+  .feat.wide { grid-template-columns: minmax(0, 1fr); }
+  .feat.wide .frame.gal { grid-row: auto; margin-bottom: .5rem; }
+  .feat.wide h3 { font-size: 1.5rem; }
+}
+@media (max-width: 480px) { .thumb { grid-template-columns: 1fr; } .thumb img { height: 3.6rem; } .thumb span { padding: .2rem .4rem .4rem; } }
+
 footer { background: var(--ink); border-top: 1px solid var(--line); text-align: center; padding-block: 4rem; }
 footer .inner { display: grid; gap: 1rem; justify-items: center; }
 
@@ -356,14 +378,15 @@ footer .inner { display: grid; gap: 1rem; justify-items: center; }
         <h2>Casos destacados</h2>
         <p>Cinco proyectos que resumen cómo trabajo. Elige uno o desliza para ver el siguiente.</p>
       </div>
-      <div class="chips" aria-label="Elegir caso"><button type="button" class="chip" data-i="0" aria-pressed="true">Portal central</button><button type="button" class="chip" data-i="1" aria-pressed="false">Catálogo y API</button><button type="button" class="chip" data-i="2" aria-pressed="false">Base para Looker</button><button type="button" class="chip" data-i="3" aria-pressed="false">Monitoreo</button><button type="button" class="chip" data-i="4" aria-pressed="false">Gestión del trabajo</button></div>
+      <div class="chips" aria-label="Elegir caso"><button type="button" class="chip" data-i="0" aria-pressed="true">Portal central</button><button type="button" class="chip" data-i="1" aria-pressed="false">Catálogo y API</button><button type="button" class="chip" data-i="2" aria-pressed="false">Bases para reportería</button><button type="button" class="chip" data-i="3" aria-pressed="false">Monitoreo</button><button type="button" class="chip" data-i="4" aria-pressed="false">Gestión del trabajo</button></div>
       <div class="feats">
         <article class="feat wide">
-          <div class="frame"><button class="shot" type="button" aria-label="Ver caso: Portal central de la empresa"><img src="assets/dashboard.jpg" alt="Portal central de la empresa" width="1176" height="836" loading="lazy"></button></div>
+          <div class="frame gal"><button class="shot" type="button" aria-label="Ampliar imagen"><img src="assets/dashboard.jpg" alt="Panel de control" loading="lazy"></button><div class="thumbs"><button type="button" class="thumb" aria-pressed="true"><img src="assets/dashboard.jpg" alt="Panel de control" loading="lazy"><span>Panel de control</span></button><button type="button" class="thumb" aria-pressed="false"><img src="assets/login.jpg" alt="Inicio de sesión" loading="lazy"><span>Inicio de sesión</span></button></div></div>
           <span class="tag">Plataforma</span>
           <h3>Portal central de la empresa</h3>
           <p>Una sola aplicación para operaciones, comercial, datos y soporte.</p>
           <ul class="facts"><li><b>21</b><span>módulos</span></li><li><b>64</b><span>personas registradas</span></li></ul>
+          <ul class="tech"><li>React</li><li>Django</li><li>PostgreSQL</li><li>Docker</li></ul>
           <span class="more">Ver caso completo →</span>
           <div class="case-body" hidden>
             <section><h4>El problema</h4><p>Las herramientas del día a día estaban repartidas entre sistemas y planillas, sin un lugar común ni permisos claros por área.</p></section>
@@ -373,11 +396,12 @@ footer .inner { display: grid; gap: 1rem; justify-items: center; }
           </div>
         </article>
         <article class="feat wide">
-          <div class="frame"><button class="shot" type="button" aria-label="Ver caso: Catálogo de vehículos y API para la web"><img src="assets/catalogo.jpg" alt="Catálogo de vehículos y API para la web" width="1176" height="836" loading="lazy"></button></div>
+          <div class="frame gal"><button class="shot" type="button" aria-label="Ampliar imagen"><img src="assets/catalogo.jpg" alt="Catálogo de usados" loading="lazy"></button><div class="thumbs"><button type="button" class="thumb" aria-pressed="true"><img src="assets/catalogo.jpg" alt="Catálogo de usados" loading="lazy"><span>Catálogo de usados</span></button><button type="button" class="thumb" aria-pressed="false"><img src="assets/detalle.jpg" alt="Ficha con fotos y 360°" loading="lazy"><span>Ficha con fotos y 360°</span></button></div></div>
           <span class="tag">Datos e integración</span>
           <h3>Catálogo de vehículos y API para la web</h3>
           <p>Usados y nuevos se gestionan internamente y alimentan la página web.</p>
           <ul class="facts"><li><b>30 min</b><span>de sincronización</span></li><li><b>1</b><span>fuente de datos</span></li></ul>
+          <ul class="tech"><li>Airflow</li><li>API propia</li><li>Cloudinary</li><li>Python</li></ul>
           <span class="more">Ver caso completo →</span>
           <div class="case-body" hidden>
             <section><h4>El problema</h4><p>La web de la empresa necesitaba mostrar vehículos actualizados, con precios, ofertas y fotos gestionados por el equipo interno.</p></section>
@@ -387,11 +411,12 @@ footer .inner { display: grid; gap: 1rem; justify-items: center; }
           </div>
         </article>
         <article class="feat wide">
-          <div class="frame"><button class="shot" type="button" aria-label="Ver caso: Base de datos que alimenta Looker"><img src="assets/looker.jpg" alt="Base de datos que alimenta Looker" width="1176" height="836" loading="lazy"></button></div>
+          <div class="frame gal"><button class="shot" type="button" aria-label="Ampliar imagen"><img src="assets/looker.jpg" alt="Carga y homologaciones" loading="lazy"></button><div class="thumbs"><button type="button" class="thumb" aria-pressed="true"><img src="assets/looker.jpg" alt="Carga y homologaciones" loading="lazy"><span>Carga y homologaciones</span></button><button type="button" class="thumb" aria-pressed="false"><img src="assets/bases.jpg" alt="Tablas de la base de reportes" loading="lazy"><span>Tablas de la base de reportes</span></button></div></div>
           <span class="tag">Automatización</span>
-          <h3>Base de datos que alimenta Looker</h3>
-          <p>Procesos en Python limpian la data y entregan la base con la que se trabaja en Looker.</p>
+          <h3>Bases de datos que alimentan reportería</h3>
+          <p>Procesos en Python limpian la data y entregan las bases con las que se arman los reportes en Looker.</p>
           <ul class="facts"><li><b>3×</b><span>cargas al día</span></li><li><b>177.679</b><span>filas de forecast</span></li></ul>
+          <ul class="tech"><li>Python</li><li>Airflow</li><li>PostgreSQL</li><li>SQL Server</li></ul>
           <span class="more">Ver caso completo →</span>
           <div class="case-body" hidden>
             <section><h4>El problema</h4><p>Parte de la información para gerencia dependía de archivos Excel que se cargaban manualmente.</p></section>
@@ -401,11 +426,12 @@ footer .inner { display: grid; gap: 1rem; justify-items: center; }
           </div>
         </article>
         <article class="feat wide">
-          <div class="frame"><button class="shot" type="button" aria-label="Ver caso: Monitoreo de API y calidad de datos"><img src="assets/monitoreo.jpg" alt="Monitoreo de API y calidad de datos" width="1176" height="836" loading="lazy"></button></div>
+          <div class="frame gal"><button class="shot" type="button" aria-label="Ampliar imagen"><img src="assets/monitoreo.jpg" alt="Monitoreo de API" loading="lazy"></button><div class="thumbs"><button type="button" class="thumb" aria-pressed="true"><img src="assets/monitoreo.jpg" alt="Monitoreo de API" loading="lazy"><span>Monitoreo de API</span></button><button type="button" class="thumb" aria-pressed="false"><img src="assets/calidad.jpg" alt="Calidad de datos de clientes" loading="lazy"><span>Calidad de datos de clientes</span></button></div></div>
           <span class="tag">Monitoreo</span>
           <h3>Monitoreo de API y calidad de datos</h3>
           <p>Monitoreo las API y la calidad de la información que se carga a nuestro DMS, con el detalle exacto de cada error.</p>
           <ul class="facts"><li><b>1.053</b><span>llamadas a SAP registradas</span></li><li><b>3</b><span>integraciones monitoreadas</span></li></ul>
+          <ul class="tech"><li>API REST</li><li>SQL Server</li><li>Django</li><li>React</li></ul>
           <span class="more">Ver caso completo →</span>
           <div class="case-body" hidden>
             <section><h4>El problema</h4><p>Hacía falta ver en un solo lugar qué se envía por las API, cuándo se envía y si la información que entra al DMS llega bien.</p></section>
@@ -415,11 +441,12 @@ footer .inner { display: grid; gap: 1rem; justify-items: center; }
           </div>
         </article>
         <article class="feat wide">
-          <div class="frame duo"><button class="shot" type="button" aria-label="Ver caso: Gestión y orden del trabajo"><img src="assets/proyectos.jpg" alt="Gestión y orden del trabajo" width="1176" height="836" loading="lazy"></button><button class="shot" type="button" aria-label="Ampliar: panel de requerimientos"><img src="assets/requerimientos.jpg" alt="Panel de requerimientos por etapa y semana" loading="lazy"></button></div>
+          <div class="frame gal"><button class="shot" type="button" aria-label="Ampliar imagen"><img src="assets/proyectos.jpg" alt="Gestión de proyectos" loading="lazy"></button><div class="thumbs"><button type="button" class="thumb" aria-pressed="true"><img src="assets/proyectos.jpg" alt="Gestión de proyectos" loading="lazy"><span>Gestión de proyectos</span></button><button type="button" class="thumb" aria-pressed="false"><img src="assets/requerimientos.jpg" alt="Panel de requerimientos" loading="lazy"><span>Panel de requerimientos</span></button></div></div>
           <span class="tag">Gestión</span>
           <h3>Gestión y orden del trabajo</h3>
           <p>Creo herramientas acordes a cada caso para ordenar el flujo de trabajo, definir mejor los proyectos y dar seguimiento a los problemas.</p>
           <ul class="facts"><li><b>54</b><span>proyectos registrados</span></li><li><b>84</b><span>tickets en seguimiento</span></li></ul>
+          <ul class="tech"><li>Django</li><li>React</li><li>Jira</li><li>Diagramas de flujo</li></ul>
           <span class="more">Ver caso completo →</span>
           <div class="case-body" hidden>
             <section><h4>El problema</h4><p>Hacía falta definir mejor los proyectos, dar seguimiento a las problemáticas y llevar control de los tiempos.</p></section>
@@ -766,6 +793,13 @@ footer .inner { display: grid; gap: 1rem; justify-items: center; }
 
   var big = zoom.querySelector("img"), winTag = document.getElementById("win-tag"), winTitle = document.getElementById("win-title"), winText = document.getElementById("win-text");
   document.addEventListener("click", function (e) {
+    var th = e.target.closest(".thumb");
+    if (th) {
+      var main = th.closest(".gal").querySelector(".shot img"), pic = th.querySelector("img");
+      main.src = pic.src; main.alt = pic.alt;
+      th.parentNode.querySelectorAll(".thumb").forEach(function (t) { t.setAttribute("aria-pressed", t === th ? "true" : "false"); });
+      return;
+    }
     var hit = e.target.closest(".feat, .app, .shot");
     if (!hit || zoom.contains(hit)) return;
     var card = hit.closest(".feat, .app"), img = hit.querySelector("img");
