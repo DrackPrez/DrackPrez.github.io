@@ -141,13 +141,13 @@ nav a:hover { color: var(--cyan); }
 .demo-note { font: 400 .78rem/1.4 var(--mono); color: var(--muted); padding: .7rem 1.1rem; background: var(--ink); }
 
 /* Casos */
-.cases { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.4rem; }
-.case { background: var(--panel); padding: 1.6rem; display: grid; gap: .8rem; align-content: start; min-width: 0; }
+.cases { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.4rem; }
+.case { flex: 0 1 calc((100% - 2.8rem) / 3); background: var(--panel); padding: 1.6rem; display: grid; gap: .8rem; align-content: start; min-width: 0; }
 .case .big { font: 400 3rem/1 var(--display); color: var(--cyan); font-variant-numeric: tabular-nums; }
 .case .tag { font: 600 .82rem/1.3 var(--label); letter-spacing: .14em; text-transform: uppercase; }
 .case p { font-size: .98rem; color: var(--muted); }
 .case code { font-family: var(--mono); font-size: .86em; color: var(--fg); }
-@media (max-width: 860px) { .cases { grid-template-columns: 1fr; } }
+@media (max-width: 860px) { .case { flex-basis: 100%; } }
 
 /* Herramientas */
 .tools { display: flex; flex-wrap: wrap; gap: 1.8rem 1.2rem; justify-content: center; }
@@ -181,6 +181,7 @@ nav a:hover { color: var(--cyan); }
 .node { flex: 1 1 0; min-width: 0; background: var(--panel); border: 1px solid var(--line); padding: 1rem .55rem; text-align: center; display: grid; gap: .3rem; justify-items: center; align-content: start; transition: border-color .3s, transform .3s, background .3s; }
 .node.on { border-color: var(--cyan); transform: translateY(-5px); background: #29304a; }
 .node .ico { width: 3rem; height: 3rem; border-radius: 50%; background: #fff; color: #17324d; display: grid; place-items: center; font-size: 1.4rem; }
+.node .ico .sql { font: 500 .8rem/1 var(--mono); }
 .node .ico img { width: 66%; height: 66%; object-fit: contain; }
 .node b { font: 600 .92rem/1.2 var(--label); letter-spacing: .07em; text-transform: uppercase; }
 .node small { font-size: .82rem; line-height: 1.3; color: var(--muted); }
@@ -232,7 +233,7 @@ footer .inner { display: grid; gap: 1rem; justify-items: center; }
       <path d="M0 410 C 260 410, 320 250, 600 250 S 960 410, 1200 410"/>
     </svg>
     <div class="inner">
-      <span class="eyebrow">Ingeniero en Informática · Temuco, Chile</span>
+      <span class="eyebrow">Líder de Sistemas Core · Temuco, Chile</span>
       <h1>Nicolás Pérez</h1>
       <p>Construyo las herramientas internas que una empresa usa cada día y conecto los sistemas que las alimentan.</p>
       <a class="btn" href="#portal">Ver lo que he hecho</a>
@@ -242,7 +243,7 @@ footer .inner { display: grid; gap: 1rem; justify-items: center; }
   <div class="strip">
     <div class="inner">
       <div><b>Aplicaciones web</b><span>Django y React, de la base de datos a la pantalla</span></div>
-      <div><b>Datos automatizados</b><span>Flujos programados con Airflow y paneles en Looker</span></div>
+      <div><b>Datos automatizados</b><span>Flujos programados con Airflow y datos listos para reportes</span></div>
       <div><b>Integraciones</b><span>SAP, Salesforce, API REST y SFTP</span></div>
     </div>
   </div>
@@ -304,7 +305,7 @@ footer .inner { display: grid; gap: 1rem; justify-items: center; }
         <div class="core reveal"><b>De la base de datos a la pantalla</b></div>
         <ul>
           <li class="reveal right"><span class="dot">SQL</span><div><b>Datos</b><small>SQL Server, PostgreSQL, MySQL, pandas</small></div></li>
-          <li class="reveal right delay1"><span class="dot">DAG</span><div><b>Automatización</b><small>Airflow, n8n, Power BI, Looker Studio</small></div></li>
+          <li class="reveal right delay1"><span class="dot">DAG</span><div><b>Automatización</b><small>Airflow, n8n, Python, cargas programadas</small></div></li>
           <li class="reveal right delay2"><span class="dot">Dk</span><div><b>Infraestructura</b><small>Docker, PM2, Nginx, Ubuntu Server</small></div></li>
         </ul>
       </div>
@@ -352,6 +353,7 @@ footer .inner { display: grid; gap: 1rem; justify-items: center; }
         <button type="button" role="tab" id="tab-rebate" aria-controls="p-rebate" aria-selected="false">Rebate Toyota</button>
         <button type="button" role="tab" id="tab-auto" aria-controls="p-auto" aria-selected="false">Flujo de automatización</button>
         <button type="button" role="tab" id="tab-reportes" aria-controls="p-reportes" aria-selected="false">Flujo de reportería</button>
+        <button type="button" role="tab" id="tab-monitoreo" aria-controls="p-monitoreo" aria-selected="false">Monitoreos</button>
       </div>
       <div class="strong reveal" id="p-catalogo" role="tabpanel" aria-labelledby="tab-catalogo">
         <div class="flow"><div class="node"><span class="ico"><img src="assets/logos/sqlserver.svg" alt=""></span><b>Sistema de gestión</b><small>Stock y precios</small></div><i class="link" aria-hidden="true"></i><div class="node"><span class="ico"><img src="assets/logos/airflow.svg" alt=""></span><b>Airflow</b><small>Sincroniza cada 30 min</small></div><i class="link" aria-hidden="true"></i><div class="node"><span class="ico"><img src="assets/logos/django.svg" alt=""></span><b>Portal</b><small>Gestión interna edita</small></div><i class="link" aria-hidden="true"></i><div class="node"><span class="ico"><img src="assets/logos/cloudinary.svg" alt=""></span><b>Cloudinary</b><small>Fotos optimizadas</small></div><i class="link" aria-hidden="true"></i><div class="node"><span class="ico"><img src="assets/logos/fastapi.svg" alt=""></span><b>Mi API</b><small>Entrega los datos</small></div><i class="link" aria-hidden="true"></i><div class="node"><span class="ico"><img src="assets/logos/react.svg" alt=""></span><b>Página web</b><small>El cliente ve el stock</small></div></div>
@@ -378,7 +380,7 @@ footer .inner { display: grid; gap: 1rem; justify-items: center; }
       </div>
 
       <div class="strong" id="p-auto" role="tabpanel" aria-labelledby="tab-auto" hidden>
-        <div class="flow"><div class="node"><span class="ico"><img src="assets/logos/python.svg" alt=""></span><b>Proceso</b><small>Script en Python</small></div><i class="link" aria-hidden="true"></i><div class="node"><span class="ico"><img src="assets/logos/airflow.svg" alt=""></span><b>Airflow</b><small>Orquesta y reintenta</small></div><i class="link" aria-hidden="true"></i><div class="node"><span class="ico"><img src="assets/logos/postgresql.svg" alt=""></span><b>Datos</b><small>Limpia y guarda</small></div><i class="link" aria-hidden="true"></i><div class="node"><span class="ico"><img src="assets/logos/n8n.svg" alt=""></span><b>Notificación</b><small>Correo o aviso</small></div><i class="link" aria-hidden="true"></i><div class="node"><span class="ico"><span aria-hidden="true">⌂</span></span><b>Usuario</b><small>Recibe el resultado</small></div></div>
+        <div class="flow"><div class="node"><span class="ico"><img src="assets/logos/python.svg" alt=""></span><b>Proceso</b><small>Script en Python</small></div><i class="link" aria-hidden="true"></i><div class="node"><span class="ico"><img src="assets/logos/airflow.svg" alt=""></span><b>Airflow</b><small>Orquesta y reintenta</small></div><i class="link" aria-hidden="true"></i><div class="node"><span class="ico"><img src="assets/logos/postgresql.svg" alt=""></span><b>Datos</b><small>Limpia y guarda</small></div><i class="link" aria-hidden="true"></i><div class="node"><span class="ico"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span><b>Correo</b><small>Aviso automático</small></div><i class="link" aria-hidden="true"></i><div class="node"><span class="ico"><span aria-hidden="true">⌂</span></span><b>Usuario</b><small>Recibe el resultado</small></div></div>
         <div class="pane">
           <div class="frame"><button class="shot" type="button" aria-label="Ampliar: Procesos que corren solos"><img src="assets/airflow.jpg" alt="Procesos que corren solos" width="1176" height="836" loading="lazy"></button></div>
           <div class="copy">
@@ -390,13 +392,25 @@ footer .inner { display: grid; gap: 1rem; justify-items: center; }
       </div>
 
       <div class="strong" id="p-reportes" role="tabpanel" aria-labelledby="tab-reportes" hidden>
-        <div class="flow"><div class="node"><span class="ico"><img src="assets/logos/sqlserver.svg" alt=""></span><b>Sistema de gestión</b><small>Facturación y costos</small></div><i class="link" aria-hidden="true"></i><div class="node"><span class="ico"><img src="assets/logos/airflow.svg" alt=""></span><b>Airflow</b><small>Corre 3 veces al día</small></div><i class="link" aria-hidden="true"></i><div class="node"><span class="ico"><img src="assets/logos/python.svg" alt=""></span><b>Transformación</b><small>Homologa y calcula márgenes</small></div><i class="link" aria-hidden="true"></i><div class="node"><span class="ico"><img src="assets/logos/postgresql.svg" alt=""></span><b>PostgreSQL</b><small>Base de reportes</small></div><i class="link" aria-hidden="true"></i><div class="node"><span class="ico"><img src="assets/logos/looker.svg" alt=""></span><b>Looker y Power BI</b><small>Gerencia decide</small></div></div>
+        <div class="flow"><div class="node"><span class="ico"><img src="assets/logos/sqlserver.svg" alt=""></span><b>Sistema de gestión</b><small>Facturación y costos</small></div><i class="link" aria-hidden="true"></i><div class="node"><span class="ico"><img src="assets/logos/airflow.svg" alt=""></span><b>Airflow</b><small>Corre 3 veces al día</small></div><i class="link" aria-hidden="true"></i><div class="node"><span class="ico"><img src="assets/logos/python.svg" alt=""></span><b>Transformación</b><small>Homologa y calcula márgenes</small></div><i class="link" aria-hidden="true"></i><div class="node"><span class="ico"><img src="assets/logos/postgresql.svg" alt=""></span><b>PostgreSQL</b><small>Base de reportes</small></div><i class="link" aria-hidden="true"></i><div class="node"><span class="ico"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 20V10"/><path d="M12 20V4"/><path d="M20 20v-7"/></svg></span><b>Paneles de gerencia</b><small>Reciben datos listos</small></div></div>
         <div class="pane">
           <div class="frame"><button class="shot" type="button" aria-label="Ampliar: Adiós a la carga manual"><img src="assets/looker.jpg" alt="Adiós a la carga manual" width="1176" height="836" loading="lazy"></button></div>
           <div class="copy">
             <h3>Adiós a la carga manual</h3>
             <p class="muted">El informe que antes se subía a mano desde Excel ahora se construye solo. Finanzas ajusta las homologaciones desde una pantalla.</p>
             <ul><li>177.679 filas de forecast procesadas</li><li>Los últimos meses se recargan y los anteriores quedan congelados</li><li>Monitoreo de cada ejecución desde el portal</li></ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="strong" id="p-monitoreo" role="tabpanel" aria-labelledby="tab-monitoreo" hidden>
+        <div class="flow"><div class="node"><span class="ico"><img src="assets/logos/sqlserver.svg" alt=""></span><b>Base de datos</b><small>Entro a la fuente</small></div><i class="link" aria-hidden="true"></i><div class="node"><span class="ico"><span class="sql">SQL</span></span><b>SELECT</b><small>Saco lo que necesito</small></div><i class="link" aria-hidden="true"></i><div class="node"><span class="ico"><img src="assets/logos/fastapi.svg" alt=""></span><b>API propia</b><small>Nace de ese SELECT</small></div><i class="link" aria-hidden="true"></i><div class="node"><span class="ico"><img src="assets/logos/django.svg" alt=""></span><b>Página interna</b><small>Muestra la información</small></div><i class="link" aria-hidden="true"></i><div class="node"><span class="ico"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="9" cy="8" r="4"/><path d="M2 21c0-4 3-7 7-7s7 3 7 7"/><path d="M16 4a4 4 0 0 1 0 8"/><path d="M19 15c2 1 3 3 3 6"/></svg></span><b>Equipo</b><small>Ve todo el flujo</small></div></div>
+        <div class="pane">
+          <div class="frame"><button class="shot" type="button" aria-label="Ampliar: Monitoreo de punta a punta"><img src="assets/monitoreo.jpg" alt="Monitoreo de punta a punta" width="1176" height="836" loading="lazy"></button></div>
+          <div class="copy">
+            <h3>Monitoreo de punta a punta</h3>
+            <p class="muted">Entro a la base de datos, genero una API a partir de un SELECT con la información que necesito y la muestro en la página interna. Así llevamos monitoreo completo del flujo de la información.</p>
+            <ul><li>Monitoreo de SAP, Crossover y Astara</li><li>1.053 llamadas registradas hacia SAP</li><li>Resultados, tiempos y errores a la vista</li></ul>
           </div>
         </div>
       </div>
@@ -416,8 +430,6 @@ footer .inner { display: grid; gap: 1rem; justify-items: center; }
         <article class="case reveal"><div class="big">API</div><span class="tag">Creada y administrada por mí</span><h3>Datos para la página web</h3><p>Desarrollé la API que entrega los vehículos que se muestran en la web y sincroniza los catálogos entre sistemas.</p></article>
         <article class="case reveal delay1"><div class="big">54</div><span class="tag">Proyectos registrados</span><h3>Herramientas para gestionar</h3><p>Proyectos TI, 84 tickets de soporte y diagramas de flujo para ordenar problemas y dar seguimiento.</p></article>
         <article class="case reveal delay2"><div class="big">1.053</div><span class="tag">Llamadas registradas</span><h3>Visibilidad de SAP</h3><p>El monitoreo muestra qué se envió a SAP, qué falló y por qué, sin revisar a ciegas.</p></article>
-        <article class="case reveal"><div class="big">9</div><span class="tag">Facturas afectadas</span><h3>Asientos vacíos en SAP</h3><p>Un <code>INNER JOIN</code> dejaba fuera órdenes con solo servicios externos. Encontré la causa y corregí el patrón.</p></article>
-        <article class="case reveal delay1"><div class="big">~430</div><span class="tag">Tablas mapeadas</span><h3>Una base sin documentar</h3><p>Reconstruí el modelo de datos del sistema de gestión y lo convertí en una base de conocimiento.</p></article>
         <article class="case reveal delay2"><div class="big">228</div><span class="tag">Vehículos con fotos gestionadas</span><h3>Fotos con Cloudinary</h3><p>Sesiones, revisión y vista 360° por vehículo, con imágenes optimizadas para cargar rápido.</p></article>
       </div>
     </div>
@@ -431,7 +443,7 @@ footer .inner { display: grid; gap: 1rem; justify-items: center; }
       <div class="timeline">
         <article class="reveal left">
           <span class="when">Mar 2025 – Actualidad</span>
-          <h3>Ingeniero Informático</h3>
+          <h3>Líder de Sistemas Core</h3>
           <span class="tag">Automotriz Portillo Sur</span>
           <p>Diseño, desarrollo y puesta en producción de la plataforma interna, pipelines de datos, API REST y reportería financiera.</p>
         </article>
@@ -476,7 +488,6 @@ footer .inner { display: grid; gap: 1rem; justify-items: center; }
         <div class="tool"><div class="disc"><img src="assets/logos/salesforce.svg" alt="" loading="lazy"></div><b>Salesforce</b></div>
         <div class="tool"><div class="disc"><img src="assets/logos/sap.svg" alt="" loading="lazy"></div><b>SAP</b></div>
         <div class="tool"><div class="disc"><img src="assets/logos/cloudinary.svg" alt="" loading="lazy"></div><b>Cloudinary</b></div>
-        <div class="tool"><div class="disc"><img src="assets/logos/looker.svg" alt="" loading="lazy"></div><b>Looker</b></div>
       </div>
     </div>
   </section>
