@@ -106,7 +106,7 @@ nav a:hover { color: var(--cyan); }
 @media (max-width: 860px) { .skills { grid-template-columns: 1fr; } .core { width: 12rem; margin: 0 auto; order: -1; } }
 
 /* Cifras y pasos */
-.numbers { display: grid; grid-template-columns: minmax(10rem, 13rem) minmax(0, 1fr); gap: 0; }
+.numbers { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0; }
 .stats { background: var(--ink); border: 1px solid var(--line); display: grid; text-align: center; }
 .stats > div { padding: 1.4rem .8rem; border-bottom: 1px solid var(--line); }
 .stats > div:last-child { border-bottom: 0; background: var(--panel); }
@@ -218,6 +218,25 @@ footer .inner { display: grid; gap: 1rem; justify-items: center; }
 .win-copy .tag { font: 600 .8rem/1.2 var(--label); letter-spacing: .16em; text-transform: uppercase; color: var(--cyan); }
 .win-copy p { color: var(--muted); font-size: 1rem; }
 #win-close { position: absolute; top: .6rem; right: .6rem; z-index: 1; width: 2.4rem; height: 2.4rem; border: 0; background: var(--cyan); color: var(--cyan-ink); font: 700 1.4rem/1 var(--body); cursor: pointer; }
+.feats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem; }
+.feat { background: var(--panel); padding: 1rem 1rem 1.3rem; display: grid; gap: .6rem; align-content: start; min-width: 0; cursor: pointer; transition: box-shadow .2s, transform .2s; }
+.feat:hover, .feat:focus-within { box-shadow: 0 0 0 2px var(--cyan), 0 18px 40px rgba(34,184,226,.25); transform: translateY(-5px); }
+.feat .frame { padding: 0; box-shadow: none; border: 0; }
+.feat .shot img { aspect-ratio: 1176 / 836; object-fit: cover; object-position: top left; }
+.feat .tag { font: 600 .8rem/1.2 var(--label); letter-spacing: .16em; text-transform: uppercase; color: var(--cyan); margin-top: .3rem; }
+.feat > p { color: var(--muted); font-size: 1rem; }
+.facts { list-style: none; margin: .2rem 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: .4rem 1.6rem; }
+.facts b { display: block; font: 400 1.7rem/1.1 var(--display); color: var(--cyan); font-variant-numeric: tabular-nums; }
+.facts span { font-size: .85rem; color: var(--muted); }
+.more { font: 600 .9rem/1.2 var(--label); letter-spacing: .12em; text-transform: uppercase; color: var(--cyan); margin-top: .3rem; }
+.win-case { padding: 0 1.4rem 1.4rem; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.1rem 1.6rem; }
+.win-case section { min-width: 0; }
+.win-case h4 { margin: 0 0 .25rem; font: 600 .9rem/1.2 var(--label); letter-spacing: .13em; text-transform: uppercase; color: var(--cyan); }
+.win-case p, .win-case ul { color: var(--muted); font-size: .96rem; }
+.win-case ul { margin: 0; padding-left: 1.05rem; }
+@media (max-width: 900px) { .feats { grid-template-columns: 1fr; } }
+@media (max-width: 620px) { .win-case { grid-template-columns: 1fr; } }
+
 .apps { padding-top: .7rem; }
 .app { cursor: pointer; }
 .app .frame { transition: border-color .2s, box-shadow .2s, transform .2s; }
@@ -235,17 +254,16 @@ footer .inner { display: grid; gap: 1rem; justify-items: center; }
   <div class="inner">
     <a class="mark" href="#inicio">NP</a>
     <nav aria-label="Secciones">
+      <a href="#casos">Casos</a>
       <a href="#portal">Portal</a>
       <a href="#habilidades">Habilidades</a>
-      <a href="#trabajo">Trabajo</a>
       <a href="#contacto">Contacto</a>
     </nav>
   </div>
   <div id="progress"></div>
 </div>
 
-<main>
-  <section class="hero" id="inicio">
+<main>  <section class="hero" id="inicio">
     <svg class="flow" viewBox="0 0 1200 500" preserveAspectRatio="none" aria-hidden="true">
       <path d="M0 90 C 260 90, 320 250, 600 250 S 960 90, 1200 90"/>
       <path d="M0 250 C 300 250, 400 250, 600 250 S 900 250, 1200 250"/>
@@ -254,38 +272,68 @@ footer .inner { display: grid; gap: 1rem; justify-items: center; }
     <div class="inner">
       <span class="eyebrow">Líder de Sistemas Core · Temuco, Chile</span>
       <h1>Nicolás Pérez</h1>
-      <p>Construyo las herramientas internas que una empresa usa cada día y conecto los sistemas que las alimentan.</p>
-      <a class="btn" href="#portal">Ver lo que he hecho</a>
+      <p>Lidero los sistemas core de un grupo automotriz: creo sus herramientas internas, conecto sus plataformas y automatizo lo que antes se hacía a mano.</p>
+      <a class="btn" href="#casos">Ver casos destacados</a>
     </div>
   </section>
-
   <div class="strip">
     <div class="inner">
       <div><b>Aplicaciones web</b><span>Django y React, de la base de datos a la pantalla</span></div>
       <div><b>Datos automatizados</b><span>Flujos programados con Airflow y datos listos para reportes</span></div>
       <div><b>Integraciones</b><span>SAP, Salesforce, API REST y SFTP</span></div>
     </div>
-  </div>
-
-  <section class="band">
-    <div class="inner about">
-      <div class="ghost" aria-hidden="true">2026</div>
-      <div class="reveal left">
-        <span class="eyebrow">Desde febrero de 2026</span>
-        <h2>Un solo portal para todo el equipo</h2>
-        <p class="muted">Levanté un sistema interno para un grupo automotriz con varias sucursales. Reúne en un mismo lugar lo que antes estaba repartido entre sistemas y planillas.</p>
+  <section class="band" id="casos">
+    <div class="inner">
+      <div class="center reveal">
+        <h2>Casos destacados</h2>
+        <p>Tres proyectos que resumen cómo trabajo.</p>
       </div>
-      <div class="frame reveal">
-        <button class="shot" type="button" aria-label="Ampliar pantalla de inicio de sesión"><img src="assets/login.jpg" alt="Inicio de sesión del portal, con acceso por Google y por contraseña" width="1716" height="876" loading="lazy"></button>
-      </div>
-      <div class="reveal right">
-        <span class="eyebrow">Diseño y desarrollo</span>
-        <div class="signature">Nicolás Pérez</div>
-        <p class="muted">Inicio de sesión con Google o contraseña, accesos por área, control de sesiones y notificaciones en tiempo real.</p>
+      <div class="feats">
+        <article class="feat reveal">
+          <div class="frame"><button class="shot" type="button" aria-label="Ver caso: Portal central de la empresa"><img src="assets/dashboard.jpg" alt="Portal central de la empresa" width="1176" height="836" loading="lazy"></button></div>
+          <span class="tag">Plataforma</span>
+          <h3>Portal central de la empresa</h3>
+          <p>Una sola aplicación para operaciones, comercial, datos y soporte.</p>
+          <ul class="facts"><li><b>21</b><span>módulos</span></li><li><b>64</b><span>personas registradas</span></li></ul>
+          <span class="more">Ver caso completo →</span>
+          <div class="case-body" hidden>
+            <section><h4>El problema</h4><p>Las herramientas del día a día estaban repartidas entre sistemas y planillas, sin un lugar común ni permisos claros por área.</p></section>
+            <section><h4>Mi rol</h4><p>Diseñé, desarrollé y puse en producción la plataforma, y sigo a cargo de su evolución.</p></section>
+            <section><h4>Decisiones clave</h4><ul><li>React en el frontend y Django en el backend, para crecer por módulos.</li><li>Accesos por área, con permisos validados en el backend.</li><li>Actualizaciones en tiempo real con WebSockets y despliegue con Docker.</li></ul></section>
+            <section><h4>Resultado</h4><ul><li>21 módulos disponibles y 64 personas registradas.</li><li>Más de 300 commits desde febrero de 2026.</li></ul></section>
+          </div>
+        </article>
+        <article class="feat reveal delay1">
+          <div class="frame"><button class="shot" type="button" aria-label="Ver caso: Catálogo de vehículos y API para la web"><img src="assets/catalogo.jpg" alt="Catálogo de vehículos y API para la web" width="1176" height="836" loading="lazy"></button></div>
+          <span class="tag">Datos e integración</span>
+          <h3>Catálogo de vehículos y API para la web</h3>
+          <p>Usados y nuevos se gestionan internamente y alimentan la página web.</p>
+          <ul class="facts"><li><b>30 min</b><span>de sincronización</span></li><li><b>1</b><span>fuente de datos</span></li></ul>
+          <span class="more">Ver caso completo →</span>
+          <div class="case-body" hidden>
+            <section><h4>El problema</h4><p>La web de la empresa necesitaba mostrar vehículos actualizados, con precios, ofertas y fotos gestionados por el equipo interno.</p></section>
+            <section><h4>Mi rol</h4><p>Construí los procesos de carga, la gestión interna y la API que entrega los datos a la web.</p></section>
+            <section><h4>Decisiones clave</h4><ul><li>Sincronización programada con Airflow cada 30 minutos.</li><li>La patente normalizada vincula cada vehículo con sus fotos.</li><li>Cloudinary entrega imágenes redimensionadas para que carguen rápido.</li></ul></section>
+            <section><h4>Resultado</h4><ul><li>Nuevos y usados quedaron centralizados en un mismo sistema.</li><li>Gestión interna edita y la web muestra esa información mediante una API administrada por mí.</li></ul></section>
+          </div>
+        </article>
+        <article class="feat reveal delay2">
+          <div class="frame"><button class="shot" type="button" aria-label="Ver caso: Reportería que dejó de ser manual"><img src="assets/looker.jpg" alt="Reportería que dejó de ser manual" width="1176" height="836" loading="lazy"></button></div>
+          <span class="tag">Automatización</span>
+          <h3>Reportería que dejó de ser manual</h3>
+          <p>El estado de resultados se actualiza sin subir archivos a mano.</p>
+          <ul class="facts"><li><b>3×</b><span>cargas al día</span></li><li><b>177.679</b><span>filas de forecast</span></li></ul>
+          <span class="more">Ver caso completo →</span>
+          <div class="case-body" hidden>
+            <section><h4>El problema</h4><p>Parte de la información para gerencia dependía de archivos Excel que se cargaban manualmente.</p></section>
+            <section><h4>Mi rol</h4><p>Automaticé los procesos y gestiono la información que llega a los paneles de gerencia.</p></section>
+            <section><h4>Decisiones clave</h4><ul><li>Pipelines programados en Airflow que limpian, homologan y calculan márgenes.</li><li>Los dos últimos meses se recargan y los anteriores quedan congelados, porque una orden puede seguir cambiando después de facturada.</li><li>Finanzas ajusta las homologaciones desde una pantalla.</li></ul></section>
+            <section><h4>Resultado</h4><ul><li>El estado de resultados se actualiza tres veces al día.</li><li>Cada ejecución queda registrada para revisarla desde el portal.</li></ul></section>
+          </div>
+        </article>
       </div>
     </div>
   </section>
-
   <section class="band tex" id="portal">
     <div class="inner">
       <div class="center reveal">
@@ -308,64 +356,12 @@ footer .inner { display: grid; gap: 1rem; justify-items: center; }
       </div>
       <div class="car-ctl">
         <button type="button" id="car-prev" aria-label="Módulos anteriores">←</button>
-        <span id="car-count" aria-live="polite">1 / 12</span>
+        <button type="button" id="car-pause" aria-label="Pausar carrusel">❚❚</button>
+        <span id="car-count">1 / 12</span>
         <button type="button" id="car-next" aria-label="Módulos siguientes">→</button>
       </div>
     </div>
   </section>
-
-  <section class="band" id="habilidades">
-    <div class="inner">
-      <div class="center reveal">
-        <h2>Cubro todo el recorrido</h2>
-        <span class="eyebrow">Lo que uso para construir</span>
-      </div>
-      <div class="skills">
-        <ul>
-          <li class="reveal left"><span class="dot">Py</span><div><b>Backend</b><small>Python, Django, FastAPI, Node.js</small></div></li>
-          <li class="reveal left delay1"><span class="dot">Re</span><div><b>Frontend</b><small>React, Vite, Tailwind, Recharts</small></div></li>
-          <li class="reveal left delay2"><span class="dot">WS</span><div><b>Tiempo real</b><small>Channels, WebSockets, Redis</small></div></li>
-        </ul>
-        <div class="core reveal"><b>De la base de datos a la pantalla</b></div>
-        <ul>
-          <li class="reveal right"><span class="dot">SQL</span><div><b>Datos</b><small>SQL Server, PostgreSQL, MySQL, pandas</small></div></li>
-          <li class="reveal right delay1"><span class="dot">DAG</span><div><b>Automatización</b><small>Airflow, n8n, Python, cargas programadas</small></div></li>
-          <li class="reveal right delay2"><span class="dot">Dk</span><div><b>Infraestructura</b><small>Docker, PM2, Nginx, Ubuntu Server</small></div></li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <section class="band tex">
-    <div class="inner numbers reveal">
-      <div class="stats">
-        <div><b data-count="24">24</b><span>Módulos de backend</span></div>
-        <div><b data-count="302">302</b><span>Commits en 2026</span></div>
-        <div><b data-count="21">21</b><span>Flujos en Airflow</span></div>
-      </div>
-      <div class="steps">
-        <div class="step">
-          <div class="frame"><button class="shot" type="button" aria-label="Ampliar diagramas de flujo"><img src="assets/diagramas.jpg" alt="Diagramas de flujo de los procesos" width="1176" height="836" loading="lazy"></button></div>
-          <span class="eyebrow">Paso uno</span>
-          <h3>Entender</h3>
-          <p>Me siento con el área, reviso sus datos y dibujo el proceso real.</p>
-        </div>
-        <div class="step">
-          <div class="frame"><button class="shot" type="button" aria-label="Ampliar panel de control"><img src="assets/dashboard.jpg" alt="Panel de control del portal" width="1176" height="836" loading="lazy"></button></div>
-          <span class="eyebrow">Paso dos</span>
-          <h3>Construir</h3>
-          <p>Convierto ese proceso en una pantalla simple, con permisos para cada perfil.</p>
-        </div>
-        <div class="step">
-          <div class="frame"><button class="shot" type="button" aria-label="Ampliar monitoreo"><img src="assets/monitoreo.jpg" alt="Monitoreo de las llamadas hacia SAP" width="1176" height="836" loading="lazy"></button></div>
-          <span class="eyebrow">Paso tres</span>
-          <h3>Automatizar</h3>
-          <p>Programo las cargas y dejo monitoreo para saber cuándo algo falla.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <section class="band alt" id="trabajo">
     <div class="inner">
       <div class="center reveal">
@@ -440,7 +436,6 @@ footer .inner { display: grid; gap: 1rem; justify-items: center; }
       </div>
     </div>
   </section>
-
   <section class="band">
     <div class="inner">
       <div class="center reveal">
@@ -458,7 +453,51 @@ footer .inner { display: grid; gap: 1rem; justify-items: center; }
       </div>
     </div>
   </section>
-
+  <section class="band" id="habilidades">
+    <div class="inner">
+      <div class="center reveal">
+        <h2>Cubro todo el recorrido</h2>
+        <span class="eyebrow">Lo que uso para construir</span>
+      </div>
+      <div class="skills">
+        <ul>
+          <li class="reveal left"><span class="dot">Py</span><div><b>Backend</b><small>Python, Django, FastAPI, Node.js</small></div></li>
+          <li class="reveal left delay1"><span class="dot">Re</span><div><b>Frontend</b><small>React, Vite, Tailwind, Recharts</small></div></li>
+          <li class="reveal left delay2"><span class="dot">WS</span><div><b>Tiempo real</b><small>Channels, WebSockets, Redis</small></div></li>
+        </ul>
+        <div class="core reveal"><b>De la base de datos a la pantalla</b></div>
+        <ul>
+          <li class="reveal right"><span class="dot">SQL</span><div><b>Datos</b><small>SQL Server, PostgreSQL, MySQL, pandas</small></div></li>
+          <li class="reveal right delay1"><span class="dot">DAG</span><div><b>Automatización</b><small>Airflow, n8n, Python, cargas programadas</small></div></li>
+          <li class="reveal right delay2"><span class="dot">Dk</span><div><b>Infraestructura</b><small>Docker, PM2, Nginx, Ubuntu Server</small></div></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+  <section class="band tex">
+    <div class="inner numbers reveal">
+      <div class="steps">
+        <div class="step">
+          <div class="frame"><button class="shot" type="button" aria-label="Ampliar diagramas de flujo"><img src="assets/diagramas.jpg" alt="Diagramas de flujo de los procesos" width="1176" height="836" loading="lazy"></button></div>
+          <span class="eyebrow">Paso uno</span>
+          <h3>Entender</h3>
+          <p>Me siento con el área, reviso sus datos y dibujo el proceso real.</p>
+        </div>
+        <div class="step">
+          <div class="frame"><button class="shot" type="button" aria-label="Ampliar panel de control"><img src="assets/dashboard.jpg" alt="Panel de control del portal" width="1176" height="836" loading="lazy"></button></div>
+          <span class="eyebrow">Paso dos</span>
+          <h3>Construir</h3>
+          <p>Convierto ese proceso en una pantalla simple, con permisos para cada perfil.</p>
+        </div>
+        <div class="step">
+          <div class="frame"><button class="shot" type="button" aria-label="Ampliar monitoreo"><img src="assets/monitoreo.jpg" alt="Monitoreo de las llamadas hacia SAP" width="1176" height="836" loading="lazy"></button></div>
+          <span class="eyebrow">Paso tres</span>
+          <h3>Automatizar</h3>
+          <p>Programo las cargas y dejo monitoreo para saber cuándo algo falla.</p>
+        </div>
+      </div>
+    </div>
+  </section>
   <section class="band tex" id="trayectoria">
     <div class="inner">
       <div class="center reveal">
@@ -486,7 +525,6 @@ footer .inner { display: grid; gap: 1rem; justify-items: center; }
       </div>
     </div>
   </section>
-
   <section class="band alt">
     <div class="inner">
       <div class="center reveal">
@@ -538,6 +576,7 @@ footer .inner { display: grid; gap: 1rem; justify-items: center; }
       <h3 id="win-title"></h3>
       <p id="win-text"></p>
     </div>
+    <div class="win-case" id="win-body" hidden></div>
   </div>
 </div>
 
@@ -602,7 +641,10 @@ footer .inner { display: grid; gap: 1rem; justify-items: center; }
     apps.appendChild(copy);
   });
   function width() { return cards[0].offsetWidth + parseFloat(getComputedStyle(apps).columnGap); }
-  var pos = 0, hold = false, resume = 0;
+  var pos = 0, hold = false, resume = 0, paused = calm, pauseBtn = document.getElementById("car-pause");
+  function drawPause() { pauseBtn.textContent = paused ? "▶" : "❚❚"; pauseBtn.setAttribute("aria-label", paused ? "Reanudar carrusel" : "Pausar carrusel"); }
+  pauseBtn.addEventListener("click", function () { paused = !paused; drawPause(); });
+  drawPause();
   function pause(ms) { resume = Date.now() + ms; }
   function move(dir) {
     pause(4000);
@@ -612,7 +654,7 @@ footer .inner { display: grid; gap: 1rem; justify-items: center; }
   }
   prev.addEventListener("click", function () { move(-1); });
   next.addEventListener("click", function () { move(1); });
-  [apps, prev, next].forEach(function (el) {
+  [apps, prev, next, pauseBtn].forEach(function (el) {
     el.addEventListener("mouseenter", function () { hold = true; });
     el.addEventListener("mouseleave", function () { hold = false; });
   });
@@ -622,7 +664,7 @@ footer .inner { display: grid; gap: 1rem; justify-items: center; }
   apps.addEventListener("touchmove", function () { pause(4000); }, { passive: true });
   setInterval(function () {
     var w = width(), loop = w * cards.length;
-    if (calm || hold || Date.now() < resume || document.hidden || !zoom.hidden) {
+    if (paused || hold || Date.now() < resume || document.hidden || !zoom.hidden) {
       pos = apps.scrollLeft;
     } else {
       pos += 0.8;
@@ -645,13 +687,15 @@ footer .inner { display: grid; gap: 1rem; justify-items: center; }
 
   var big = zoom.querySelector("img"), winTag = document.getElementById("win-tag"), winTitle = document.getElementById("win-title"), winText = document.getElementById("win-text");
   document.addEventListener("click", function (e) {
-    var hit = e.target.closest(".app, .shot");
+    var hit = e.target.closest(".feat, .app, .shot");
     if (!hit || zoom.contains(hit)) return;
-    var card = hit.closest(".app"), img = hit.querySelector("img");
+    var card = hit.closest(".feat, .app"), img = hit.querySelector("img");
     big.src = img.src; big.alt = img.alt;
     winTag.textContent = card ? card.querySelector(".tag").textContent : "";
     winTitle.textContent = card ? card.querySelector("h3").textContent : img.alt;
     winText.textContent = card ? card.querySelector("p").textContent : "";
+    var body = card && card.querySelector(".case-body"), winBody = document.getElementById("win-body");
+    winBody.innerHTML = body ? body.innerHTML : ""; winBody.hidden = !body;
     winTag.hidden = !card; winText.hidden = !card;
     zoom.hidden = false;
     document.getElementById("win-close").focus();
