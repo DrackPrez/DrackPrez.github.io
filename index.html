@@ -167,9 +167,9 @@ nav a:hover { color: var(--cyan); }
 .contact .btn.ghost-btn { background: none; color: var(--cyan); border: 1px solid var(--cyan); }
 .email { font: 500 1.05rem/1.4 var(--mono); user-select: all; overflow-wrap: anywhere; }
 
-.apps { display: flex; gap: 1.5rem; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 1rem; scrollbar-width: none; }
+.apps { display: flex; gap: 1.5rem; overflow-x: auto; padding-bottom: 1rem; scrollbar-width: none; }
 .apps::-webkit-scrollbar { display: none; }
-.app { flex: 0 0 calc((100% - 3rem) / 3); scroll-snap-align: start; display: grid; gap: .55rem; align-content: start; min-width: 0; }
+.app { flex: 0 0 calc((100% - 3rem) / 3); display: grid; gap: .55rem; align-content: start; min-width: 0; }
 .app .frame { padding: .35rem; margin-bottom: .4rem; }
 .app .shot img { aspect-ratio: 1176 / 836; object-fit: cover; object-position: top left; }
 .app .tag { font: 600 .8rem/1.2 var(--label); letter-spacing: .16em; text-transform: uppercase; color: var(--cyan); }
@@ -570,40 +570,45 @@ footer .inner { display: grid; gap: 1rem; justify-items: center; }
   });
 
   var zoom = document.getElementById("zoom");
-  var apps = document.querySelector(".apps"), cards = apps.querySelectorAll(".app");
+  var apps = document.querySelector(".apps"), cards = Array.prototype.slice.call(apps.querySelectorAll(".app"));
   var prev = document.getElementById("car-prev"), next = document.getElementById("car-next"), count = document.getElementById("car-count");
-  function current() { return Math.round(apps.scrollLeft / (cards[0].offsetWidth + parseFloat(getComputedStyle(apps).columnGap))); }
-  function carousel() {
-    var end = apps.scrollLeft + apps.clientWidth >= apps.scrollWidth - 4;
-    var shown = end ? cards.length : Math.min(current() + 1, cards.length);
-    count.textContent = shown + " / " + cards.length;
-    prev.disabled = apps.scrollLeft <= 4;
-    next.disabled = end;
+  cards.forEach(function (card) {
+    var copy = card.cloneNode(true);
+    copy.classList.remove("reveal", "delay1", "delay2");
+    copy.setAttribute("aria-hidden", "true");
+    copy.querySelectorAll("button").forEach(function (b) { b.tabIndex = -1; });
+    apps.appendChild(copy);
+  });
+  function width() { return cards[0].offsetWidth + parseFloat(getComputedStyle(apps).columnGap); }
+  var pos = 0, hold = false, resume = 0;
+  function pause(ms) { resume = Date.now() + ms; }
+  function move(dir) {
+    pause(4000);
+    var w = width(), target = Math.round(apps.scrollLeft / w) + dir;
+    if (target < 0) { apps.scrollLeft += w * cards.length; target += cards.length; }
+    apps.scrollTo({ left: target * w, behavior: calm ? "auto" : "smooth" });
   }
-  function move(dir) { apps.scrollBy({ left: dir * (cards[0].offsetWidth + parseFloat(getComputedStyle(apps).columnGap)), behavior: calm ? "auto" : "smooth" }); }
-  var hold = false, resume = 0;
-  function pause() { resume = Date.now() + 6000; }
-  prev.addEventListener("click", function () { pause(); move(-1); });
-  next.addEventListener("click", function () { pause(); move(1); });
+  prev.addEventListener("click", function () { move(-1); });
+  next.addEventListener("click", function () { move(1); });
   [apps, prev, next].forEach(function (el) {
     el.addEventListener("mouseenter", function () { hold = true; });
     el.addEventListener("mouseleave", function () { hold = false; });
   });
   apps.addEventListener("focusin", function () { hold = true; });
   apps.addEventListener("focusout", function () { hold = false; });
-  apps.addEventListener("touchstart", pause, { passive: true });
-  if (!calm) {
-    setInterval(function () {
-      var r = apps.getBoundingClientRect();
-      if (hold || Date.now() < resume || document.hidden || !zoom.hidden || r.bottom < 0 || r.top > innerHeight) return;
-      if (next.disabled) apps.scrollTo({ left: 0, behavior: "smooth" });
-      else move(1);
-    }, 3500);
-  }
-  apps.addEventListener("scroll", carousel, { passive: true });
-  addEventListener("resize", carousel);
-  setInterval(carousel, 300);
-  carousel();
+  apps.addEventListener("touchstart", function () { pause(4000); }, { passive: true });
+  apps.addEventListener("touchmove", function () { pause(4000); }, { passive: true });
+  setInterval(function () {
+    var w = width(), loop = w * cards.length;
+    if (calm || hold || Date.now() < resume || document.hidden || !zoom.hidden) {
+      pos = apps.scrollLeft;
+    } else {
+      pos += 0.8;
+      if (pos >= loop) pos -= loop;
+      apps.scrollLeft = pos;
+    }
+    count.textContent = (Math.round(pos / w) % cards.length + 1) + " / " + cards.length;
+  }, 33);
 
   var copy = document.getElementById("copy");
   copy.addEventListener("click", function () {
