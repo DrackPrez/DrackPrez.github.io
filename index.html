@@ -210,8 +210,20 @@ footer .inner { display: grid; gap: 1rem; justify-items: center; }
 .js .reveal.right:not(.in) { transform: translateX(42px); }
 .delay1 { transition-delay: .12s; } .delay2 { transition-delay: .24s; }
 
-#zoom { position: fixed; inset: 0; z-index: 50; background: rgba(8,9,16,.93); padding: max(16px, env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) 16px max(16px, env(safe-area-inset-left, 0px)); display: grid; place-items: center; cursor: zoom-out; }
-#zoom img { max-height: 100%; }
+#zoom { position: fixed; inset: 0; z-index: 50; background: rgba(8,9,16,.82); padding: max(16px, env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) 16px max(16px, env(safe-area-inset-left, 0px)); display: grid; place-items: center; }
+.win { position: relative; width: min(52rem, 100%); max-height: 100%; overflow-y: auto; background: var(--panel); border: 1px solid var(--cyan); box-shadow: 0 30px 70px rgba(0,0,0,.6); animation: pop .22s ease; }
+@keyframes pop { from { transform: scale(.95); opacity: 0; } }
+.win img { display: block; width: 100%; height: auto; max-height: 62vh; object-fit: contain; background: var(--ink); }
+.win-copy { padding: 1.2rem 1.4rem 1.4rem; display: grid; gap: .4rem; }
+.win-copy .tag { font: 600 .8rem/1.2 var(--label); letter-spacing: .16em; text-transform: uppercase; color: var(--cyan); }
+.win-copy p { color: var(--muted); font-size: 1rem; }
+#win-close { position: absolute; top: .6rem; right: .6rem; z-index: 1; width: 2.4rem; height: 2.4rem; border: 0; background: var(--cyan); color: var(--cyan-ink); font: 700 1.4rem/1 var(--body); cursor: pointer; }
+.apps { padding-top: .7rem; }
+.app { cursor: pointer; }
+.app .frame { transition: border-color .2s, box-shadow .2s, transform .2s; }
+.app h3 { transition: color .2s; }
+.app:hover .frame, .app:focus-within .frame { border-color: var(--cyan); box-shadow: 0 0 0 2px var(--cyan), 0 18px 40px rgba(34,184,226,.28); transform: translateY(-6px); }
+.app:hover h3, .app:focus-within h3 { color: var(--cyan); }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
@@ -517,7 +529,17 @@ footer .inner { display: grid; gap: 1rem; justify-items: center; }
   </div>
 </footer>
 
-<div id="zoom" hidden><img alt="Pantalla ampliada"></div>
+<div id="zoom" hidden>
+  <div class="win" role="dialog" aria-modal="true" aria-labelledby="win-title">
+    <button type="button" id="win-close" aria-label="Cerrar ventana">×</button>
+    <img alt="">
+    <div class="win-copy">
+      <span class="tag" id="win-tag"></span>
+      <h3 id="win-title"></h3>
+      <p id="win-text"></p>
+    </div>
+  </div>
+</div>
 
 <script>
 (function () {
@@ -621,16 +643,22 @@ footer .inner { display: grid; gap: 1rem; justify-items: center; }
     });
   });
 
-  var big = zoom.querySelector("img");
-  document.querySelectorAll(".shot").forEach(function (b) {
-    b.addEventListener("click", function () {
-      var img = b.querySelector("img");
-      big.src = img.src; big.alt = img.alt;
-      zoom.hidden = false;
-    });
+  var big = zoom.querySelector("img"), winTag = document.getElementById("win-tag"), winTitle = document.getElementById("win-title"), winText = document.getElementById("win-text");
+  document.addEventListener("click", function (e) {
+    var hit = e.target.closest(".app, .shot");
+    if (!hit || zoom.contains(hit)) return;
+    var card = hit.closest(".app"), img = hit.querySelector("img");
+    big.src = img.src; big.alt = img.alt;
+    winTag.textContent = card ? card.querySelector(".tag").textContent : "";
+    winTitle.textContent = card ? card.querySelector("h3").textContent : img.alt;
+    winText.textContent = card ? card.querySelector("p").textContent : "";
+    winTag.hidden = !card; winText.hidden = !card;
+    zoom.hidden = false;
+    document.getElementById("win-close").focus();
   });
   function closeZoom() { zoom.hidden = true; hold = apps.matches(":hover"); }
-  zoom.addEventListener("click", closeZoom);
+  zoom.addEventListener("click", function (e) { if (e.target === zoom) closeZoom(); });
+  document.getElementById("win-close").addEventListener("click", closeZoom);
   addEventListener("keydown", function (e) { if (e.key === "Escape") closeZoom(); });
 
   if (!calm) {
