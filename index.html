@@ -253,6 +253,13 @@ nav a:hover { color: var(--cyan); }
 .thumbs.many .thumb span { font-size: .68rem; letter-spacing: .03em; padding: .15rem .3rem .3rem; }
 @media (max-width: 620px) { .thumbs.many { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 
+.edu { margin-top: 2.2rem; padding: 1.3rem 1.5rem; background: var(--panel); border: 1px solid var(--line); display: grid; grid-template-columns: auto minmax(0, 1fr) minmax(0, 1.3fr); gap: 1rem 2rem; align-items: center; }
+.edu .eyebrow { color: var(--cyan); }
+.edu h3 { font-size: 1.3rem; }
+.edu .tag { font: 600 .85rem/1.3 var(--label); letter-spacing: .1em; text-transform: uppercase; }
+.edu p { color: var(--muted); font-size: .96rem; }
+@media (max-width: 860px) { .edu { grid-template-columns: minmax(0, 1fr); } }
+
 footer { background: var(--ink); border-top: 1px solid var(--line); text-align: center; padding-block: 4rem; }
 footer .inner { display: grid; gap: 1rem; justify-items: center; }
 
@@ -358,23 +365,31 @@ footer .inner { display: grid; gap: 1rem; justify-items: center; }
       </div>
       <div class="timeline">
         <article class="reveal left">
-          <span class="when">Mar 2025 – Actualidad</span>
+          <span class="when">2026 – Actualidad</span>
           <h3>Líder de Sistemas Core</h3>
           <span class="tag">Automotriz Portillo Sur</span>
-          <p>Diseño, desarrollo y puesta en producción de la plataforma interna, pipelines de datos, API REST y reportería financiera.</p>
+          <p>Lidero la plataforma interna, los pipelines de datos, las integraciones y la reportería.</p>
+        </article>
+        <article class="reveal">
+          <span class="when">Mar 2025 – Dic 2025</span>
+          <h3>Desarrollador Junior</h3>
+          <span class="tag">Automotriz Portillo Sur</span>
+          <p>Desarrollo de API y automatizaciones, y soporte a los sistemas internos de la empresa.</p>
         </article>
         <article class="reveal right">
-          <span class="when">2021 – 2025</span>
-          <h3>Ingeniero en Informática</h3>
-          <span class="tag">INACAP Temuco · Titulado</span>
-          <p>Con especializaciones en desarrollo full stack (2024), diseño y gestión de bases de datos (2022) y soporte computacional (2022).</p>
-        </article>
-        <article class="reveal left">
           <span class="when">Nov 2020 – Feb 2021</span>
           <h3>Asistente Informático y Administrativo</h3>
           <span class="tag">MiWifiPro</span>
           <p>Gestión de clientes en CRM, apoyo técnico, atención al cliente y reportes mensuales.</p>
         </article>
+      </div>
+      <div class="edu reveal">
+        <span class="eyebrow">Formación</span>
+        <div>
+          <h3>Ingeniero en Informática</h3>
+          <span class="tag">INACAP Temuco · Titulado · 2021 – 2025</span>
+        </div>
+        <p>Especializaciones en desarrollo full stack (2024), diseño y gestión de bases de datos (2022) y soporte computacional (2022).</p>
       </div>
     </div>
   </section>
