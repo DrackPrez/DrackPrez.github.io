@@ -291,6 +291,8 @@ nav a:hover { color: var(--cyan); }
 
 .email a { color: inherit; text-decoration: none; }
 
+.step .shot img { aspect-ratio: 16 / 10; object-fit: cover; object-position: top left; }
+
 footer { background: var(--ink); border-top: 1px solid var(--line); text-align: center; padding-block: 4rem; }
 footer .inner { display: grid; gap: 1rem; justify-items: center; }
 
@@ -680,19 +682,19 @@ footer .inner { display: grid; gap: 1rem; justify-items: center; }
     <div class="inner numbers reveal">
       <div class="steps">
         <div class="step">
-          <div class="frame"><button class="shot" type="button" aria-label="Ampliar diagramas de flujo"><img src="assets/diagramas.jpg" alt="Diagramas de flujo de los procesos" width="1176" height="836" loading="lazy"></button></div>
+          <div class="frame"><button class="shot" type="button" aria-label="Ampliar lista de requerimientos"><img src="assets/reqlista.jpg" alt="Lista de requerimientos por área y prioridad" width="1638" height="829" loading="lazy"></button></div>
           <span class="eyebrow">Paso uno</span>
           <h3>Entender</h3>
           <p>Se reúne con el área, revisa sus datos y dibuja el proceso real.</p>
         </div>
         <div class="step">
-          <div class="frame"><button class="shot" type="button" aria-label="Ampliar panel de control"><img src="assets/dashboard.jpg" alt="Panel de control del portal" width="1176" height="836" loading="lazy"></button></div>
+          <div class="frame"><button class="shot" type="button" aria-label="Ampliar panel de usuarios"><img src="assets/usuarios.jpg" alt="Panel de usuarios, roles y áreas" width="1897" height="900" loading="lazy"></button></div>
           <span class="eyebrow">Paso dos</span>
           <h3>Construir</h3>
           <p>Convierte ese proceso en una pantalla simple, con permisos para cada perfil.</p>
         </div>
         <div class="step">
-          <div class="frame"><button class="shot" type="button" aria-label="Ampliar monitoreo"><img src="assets/monitoreo.jpg" alt="Monitoreo de las llamadas hacia SAP" width="1176" height="836" loading="lazy"></button></div>
+          <div class="frame"><button class="shot" type="button" aria-label="Ampliar flujos de Airflow"><img src="assets/airflow.jpg" alt="Flujos programados en Airflow" width="1895" height="911" loading="lazy"></button></div>
           <span class="eyebrow">Paso tres</span>
           <h3>Automatizar</h3>
           <p>Programa las cargas y deja monitoreo para saber cuándo algo falla.</p>
