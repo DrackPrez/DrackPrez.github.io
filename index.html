@@ -272,6 +272,25 @@ nav a:hover { color: var(--cyan); }
   .hero-photo { width: 12rem; order: -1; box-shadow: .7rem .7rem 0 var(--cyan); }
 }
 
+.hero-fig { position: relative; margin: 0 1.2rem 1.2rem 0; width: 19rem; max-width: 100%; }
+.hero-fig::before { content: ""; position: absolute; inset: 1.2rem -1.2rem -1.2rem 1.2rem; background: var(--cyan); animation: fig-block .8s .25s cubic-bezier(.2,.7,.2,1) backwards; }
+.hero-fig::after { content: ""; position: absolute; inset: -.7rem .7rem .7rem -.7rem; border: 1px solid rgba(34,184,226,.55); pointer-events: none; animation: fig-line .8s .45s ease backwards; }
+.hero-mask { position: relative; z-index: 1; overflow: hidden; animation: fig-open 1s cubic-bezier(.7,0,.2,1) backwards; }
+.hero-mask .hero-photo { width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; display: block; box-shadow: none; animation: fig-zoom 1.5s cubic-bezier(.2,.7,.2,1) backwards; transition: transform .6s cubic-bezier(.2,.7,.2,1); }
+.hero-fig:hover .hero-photo { transform: scale(1.03); }
+@keyframes fig-open { from { clip-path: inset(100% 0 0 0); } to { clip-path: inset(0 0 0 0); } }
+@keyframes fig-zoom { from { transform: scale(1.14); } }
+@keyframes fig-block { from { transform: translate(-1.2rem, -1.2rem); opacity: 0; } }
+@keyframes fig-line { from { transform: translate(.7rem, .7rem); opacity: 0; } }
+@media (max-width: 860px) {
+  .hero-fig { width: 12.5rem; order: -1; margin: .7rem .8rem .8rem .7rem; }
+  .hero-fig::before { inset: .8rem -.8rem -.8rem .8rem; }
+  .hero-fig::after { inset: -.5rem .5rem .5rem -.5rem; }
+  @keyframes fig-block { from { transform: translate(-.8rem, -.8rem); opacity: 0; } }
+}
+
+.email a { color: inherit; text-decoration: none; }
+
 footer { background: var(--ink); border-top: 1px solid var(--line); text-align: center; padding-block: 4rem; }
 footer .inner { display: grid; gap: 1rem; justify-items: center; }
 
@@ -362,7 +381,7 @@ footer .inner { display: grid; gap: 1rem; justify-items: center; }
       <p>Lidera los sistemas core de un grupo automotriz: crea sus herramientas internas, conecta sus plataformas y automatiza lo que antes se hacía a mano.</p>
       <div class="hero-cta"><a class="btn" href="#casos">Ver casos destacados</a><a class="btn ghost-btn" href="#contacto">Contactar</a></div>
       </div>
-      <img class="hero-photo" src="assets/nicolas.jpg" alt="Foto de Nicolás Pérez" width="640" height="800">
+      <figure class="hero-fig"><div class="hero-mask"><img class="hero-photo" src="assets/nicolas.jpg?v=3" alt="Foto de Nicolás Pérez" width="720" height="900"></div></figure>
     </div>
   </section>
   
@@ -652,7 +671,7 @@ footer .inner { display: grid; gap: 1rem; justify-items: center; }
       <div class="cases">
         <article class="case reveal"><div class="big">3×</div><span class="tag">Cargas diarias</span><h3>Reportería que era manual</h3><p>El estado de resultados y los informes de facturación dependían de archivos subidos a mano. Hoy se actualizan solos.</p></article>
         <article class="case reveal delay1"><div class="big">4+</div><span class="tag">Redes de marcas</span><h3>Integraciones con marcas</h3><p>Procesos que envían órdenes, repuestos, stock y ventas a Toyota, Astara y cuatro redes más, por API y SFTP.</p></article>
-        <article class="case reveal"><div class="big">API</div><span class="tag">Creada y administrada por Nicolás</span><h3>Datos para la página web</h3><p>Desarrolló la API que entrega los vehículos que se muestran en la web y sincroniza los catálogos entre sistemas.</p></article>
+        <article class="case reveal"><div class="big">API</div><span class="tag">Administración y gestión de API</span><h3>Datos para la página web</h3><p>Desarrolló la API que entrega los vehículos que se muestran en la web y sincroniza los catálogos entre sistemas.</p></article>
         <article class="case reveal delay2"><div class="big">228</div><span class="tag">Vehículos con fotos gestionadas</span><h3>Fotos con Cloudinary</h3><p>Sesiones, revisión y vista 360° por vehículo, con imágenes optimizadas para cargar rápido.</p></article>
       </div>
     </div>
@@ -686,7 +705,6 @@ footer .inner { display: grid; gap: 1rem; justify-items: center; }
 <footer id="contacto">
   <div class="inner">
     <h2>Contacto</h2>
-    <p class="muted">Para ordenar sistemas y automatizar procesos, este es el contacto de Nicolás.</p>
     <p class="email">nicoperezperez0@gmail.com</p>
     <div class="contact">
       <button class="btn" type="button" id="copy">Copiar correo</button>
