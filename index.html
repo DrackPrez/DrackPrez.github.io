@@ -2,16 +2,18 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600&family=Barlow:wght@400;500&family=IBM+Plex+Mono:wght@400;500&family=Playfair+Display:wght@400;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
-/* Layout: página larga de bandas oscuras alternadas, inspirada en la referencia: paneles que se montan sobre un bloque cian */
+/* Diseño minimalista y enérgico: fondo claro, azul eléctrico (liderazgo), amarillo sol (energía) y menta (logros).
+   Las variables mantienen sus nombres originales: --cyan es el color principal y --cyan-ink el texto sobre él. */
 :root {
-  color-scheme: dark;
-  --ink: #12131f; --band: #191a2b; --panel: #222338; --line: #38395a;
-  --fg: #eef0f6; --muted: #a6a9c0; --cyan: #22b8e2; --cyan-ink: #06222c; --todo: #ffc27a;
-  --display: "Playfair Display", Georgia, serif;
-  --label: "Barlow Condensed", "Arial Narrow", sans-serif;
-  --body: "Barlow", "Segoe UI", sans-serif;
+  color-scheme: light;
+  --ink: #fbfcff; --band: #f2f5ff; --panel: #ffffff; --line: #e3e7f3;
+  --fg: #0b1020; --muted: #5a6278; --cyan: #2f4bff; --cyan-ink: #ffffff; --todo: #ffc400;
+  --sol: #ffc400; --menta: #00c896; --azul-suave: #e8ecff;
+  --display: "Sora", "Segoe UI", sans-serif;
+  --label: "Sora", "Segoe UI", sans-serif;
+  --body: "Inter", "Segoe UI", sans-serif;
   --mono: "IBM Plex Mono", Consolas, monospace;
 }
 * { box-sizing: border-box; }
@@ -353,6 +355,102 @@ footer .inner { display: grid; gap: 1rem; justify-items: center; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
   .js .reveal:not(.in) { opacity: 1; transform: none; }
 }
+/* ===== Capa minimalista: menos adornos, más aire y colores vivos ===== */
+body { font-size: 1.02rem; }
+.band, .band.alt, .band.tex { background: var(--ink); }
+.band.alt { background: var(--band); }
+.band { padding-block: 5rem; }
+h1, h2, h3 { font-weight: 700; letter-spacing: -.025em; }
+h2 { text-transform: none; color: var(--fg); font-size: clamp(2rem, 4.6vw, 3.1rem); font-weight: 800; }
+.center h2::after { content: ""; display: block; width: 3rem; height: .32rem; margin: .9rem auto 0; border-radius: 99px; background: linear-gradient(90deg, var(--cyan), var(--sol)); }
+.eyebrow { color: var(--cyan); letter-spacing: .14em; font-size: .78rem; font-weight: 700; }
+.btn { border-radius: 12px; letter-spacing: .04em; text-transform: none; font: 600 1rem/1 var(--label); padding: 1rem 1.5rem; box-shadow: 0 10px 24px -12px rgba(47,75,255,.6); }
+.btn:hover { transform: translateY(-2px); box-shadow: 0 14px 28px -12px rgba(47,75,255,.7); }
+.hero .ghost-btn, .contact .ghost-btn, .contact .btn.ghost-btn { background: #fff; color: var(--fg); border: 1.5px solid var(--line); box-shadow: none; }
+:focus-visible { outline-color: var(--sol); }
+
+/* Barra superior */
+.top { background: rgba(251,252,255,.88); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom-color: var(--line); }
+.mark { border-radius: 10px; font: 800 1rem/1 var(--display); }
+nav { font: 600 .82rem/1 var(--label); letter-spacing: .06em; }
+nav a { color: var(--muted); }
+#progress { height: 3px; background: linear-gradient(90deg, var(--cyan), var(--menta), var(--sol)); }
+
+/* Portada: limpia, sin líneas animadas */
+.hero { background: radial-gradient(38rem 24rem at 85% 20%, rgba(47,75,255,.10), transparent 70%), radial-gradient(30rem 20rem at 10% 90%, rgba(255,196,0,.14), transparent 70%), var(--ink); }
+.hero svg.flow { display: none; }
+.hero h1 { font-weight: 800; letter-spacing: -.035em; line-height: .98; }
+@media (max-width: 600px) { .hero h1 { letter-spacing: -.015em; font-size: 2.9rem; } }
+.hero h1::after { content: "."; color: var(--sol); }
+.hero p { color: var(--muted); }
+.hero-fig::before { background: var(--sol); border-radius: 22px; }
+.hero-fig::after { border-color: rgba(47,75,255,.45); border-radius: 22px; }
+.hero-mask { border-radius: 22px; }
+.strip { background: var(--fg); border: 0; }
+.strip b { color: var(--sol); letter-spacing: .08em; }
+.strip span { color: rgba(255,255,255,.72); }
+
+/* Tarjetas y pantallas: bordes finos, esquinas redondas, sombras suaves */
+.frame { border-radius: 16px; border-color: var(--line); background: #fff; box-shadow: 0 18px 40px -28px rgba(11,16,32,.35); overflow: hidden; }
+.shot img { border-radius: 10px; }
+.feat, .feat.wide { background: #fff; border: 1px solid var(--line); border-radius: 22px; }
+.feat:hover, .feat:focus-within { box-shadow: 0 0 0 2px var(--cyan), 0 24px 40px -28px rgba(47,75,255,.45); }
+.feat .more { border-radius: 10px; }
+.facts b, .case .big, .stats b { font-weight: 800; letter-spacing: -.03em; }
+.facts b { color: var(--cyan); }
+.tech li { border-radius: 999px; background: var(--band); border-color: transparent; color: var(--fg); }
+.chip { border-radius: 999px; background: #fff; font-weight: 600; letter-spacing: .04em; text-transform: none; }
+.chip[aria-pressed="true"] { background: var(--fg); border-color: var(--fg); color: #fff; }
+.thumb { border-radius: 10px; overflow: hidden; background: var(--band); }
+.thumb span { text-transform: none; letter-spacing: 0; font-weight: 600; }
+.case { background: #fff; border: 1px solid var(--line); border-radius: 20px; }
+.case:nth-child(4n+1) .big { color: var(--cyan); }
+.case:nth-child(4n+2) .big { color: var(--menta); }
+.case:nth-child(4n+3) .big { color: #f5a300; }
+.case:nth-child(4n+4) .big { color: #7a5cff; }
+.app .tag, .feat .tag, .win-copy .tag, .more { color: var(--cyan); letter-spacing: .08em; }
+.pane { background: #fff; border: 1px solid var(--line); border-radius: 22px; overflow: hidden; }
+.pane h3 { color: var(--fg); text-transform: none; font-weight: 800; }
+.tabs button { text-transform: none; letter-spacing: .02em; }
+.tabs button[aria-selected="true"] { border-bottom-color: var(--sol); border-bottom-width: 3px; }
+.node { background: #fff; border-radius: 16px; }
+.node.on { background: var(--azul-suave); border-color: var(--cyan); }
+.node .ico { background: var(--band); }
+
+/* Habilidades y herramientas */
+.dot { background: var(--azul-suave); border-color: transparent; color: var(--cyan); font-weight: 600; }
+.skills b, .tool b { text-transform: none; letter-spacing: 0; font-weight: 700; }
+.core { border: 2px solid var(--cyan); background: radial-gradient(circle, var(--azul-suave), #fff 70%); }
+@keyframes pulse { 50% { box-shadow: 0 0 0 14px rgba(255,196,0,.18); } }
+.tool .disc { background: #fff; border: 1px solid var(--line); box-shadow: 0 8px 18px -14px rgba(11,16,32,.4); }
+
+/* Trayectoria y formación */
+.timeline article::before { background: var(--line); }
+.timeline article:first-child { border-top-color: var(--cyan); }
+.timeline article:first-child::before { background: var(--sol); box-shadow: 0 0 0 5px rgba(255,196,0,.28); }
+.when { color: var(--cyan); }
+.timeline .tag, .edu .tag { color: var(--muted); letter-spacing: .06em; }
+.edu { background: #fff; border-radius: 20px; }
+
+/* Método y pasos */
+.steps { background: transparent; border-top: 0; gap: 1rem; }
+.step { background: #fff; border: 1px solid var(--line); border-radius: 20px; }
+.step:first-child { border-left: 1px solid var(--line); }
+.step h3 { color: var(--fg); text-transform: none; font-weight: 800; }
+.step .eyebrow { color: var(--menta); }
+
+/* Carruseles, ventana y pie */
+.car-ctl button { border-radius: 12px; border-color: var(--line); color: var(--fg); background: #fff; }
+.car-ctl button:hover { background: var(--fg); color: #fff; }
+.win { border-color: var(--line); border-radius: 20px; box-shadow: 0 30px 70px rgba(11,16,32,.35); }
+#zoom { background: rgba(11,16,32,.55); }
+#win-close { border-radius: 10px; }
+.ghost { color: rgba(11,16,32,.04); }
+footer { background: var(--fg); color: #fff; border-top: 0; }
+footer h2 { color: #fff; }
+footer .email { color: var(--sol); }
+footer .contact .btn.ghost-btn { background: transparent; color: #fff; border-color: rgba(255,255,255,.3); }
+
 </style>
 
 <div class="top">
